@@ -99,22 +99,30 @@ bool Engineer::insertEngineer() {
 		if (std::cin >> i;  i == 0) {
 			return true;
 		}
-		userInputEngineer();
+		//userInputEngineer();
 
-		insertEmployee();
-		std::string query = "";
-		query += "INSERT INTO Engineer VALUES ( " + to_string(getId()) + ", ' " + programming_language + " ' , ' " + specialization + " ') ;";
-		int rc = Database::getInstance().executeQuery(query.c_str());
-		if (rc == 0) {
-			std::cout << "Engineer Inserted successfully\n\n";
-			waitMenu();
-			return true;
+		if (auto ch = insertEmployee(); ch) { 
+			std::string query = ""; 
+			query += "INSERT INTO Engineer VALUES ( " + to_string(getId()) + ", ' " + programming_language + " ' , ' " + specialization + " ') ;";
+			int rc = Database::getInstance().executeQuery(query.c_str()); 
+			if (rc == 0) {
+				std::cout << "Engineer Inserted successfully\n\n";  
+				waitMenu(); 
+				return true;
+			}
+			else if (rc == 19) { 
+				std::cout << "Entered Enginner is already exist\n\n";  
+				waitMenu();   
+				return false;
+			}
 		}
-		else if (rc == 19) {
-			std::cout << "Entered Enginner is already exist\n\n";
-			waitMenu();
+		else {
+			//std::cout << "Entered Enginner is already exist\n\n"; 
+			//waitMenu(); 
+			//waitMenu(); 
 			return false;
 		}
+		
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;

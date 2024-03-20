@@ -17,6 +17,11 @@ protected:
 		emp.setDoj("01-01-2024");
 		emp.setManagerId(1);
 		emp.setDepartmentId(1);
+
+		std::stringstream input(" Surat Gujarat"); 
+		std::streambuf* originalCin = std::cin.rdbuf(input.rdbuf());
+		emp.setAddress(); 
+		std::cin.rdbuf(originalCin);
 	}
 
 	void TearDown() {

@@ -100,21 +100,26 @@ bool Manager::insertManager() {
 		}
 		userInputManager();
 
-		insertEmployee();
-		std::string query = "";
-		query += "INSERT INTO Manager VALUES ( " + to_string(getId()) + ", " + std::to_string(getManagementExperience()) + " , ' " + getProjectTitle() + " ') ;";
-		//std::cout << query << "\n";
-		int rc = Database::getInstance().executeQuery(query.c_str());
-		if (rc == 0) {
-			std::cout << "Manager inserted successfully\n\n";
-			waitMenu();
-			return true;
+		if (auto ch = insertEmployee(); ch){
+			std::string query = ""; 
+			query += "INSERT INTO Manager VALUES ( " + to_string(getId()) + ", " + std::to_string(getManagementExperience()) + " , ' " + getProjectTitle() + " ') ;";    
+			//std::cout << query << "\n";
+			int rc = Database::getInstance().executeQuery(query.c_str());  
+			if (rc == 0) {
+				std::cout << "Manager inserted successfully\n\n"; 
+				waitMenu(); 
+				return true;
+			}
+			else if (rc == 19) {
+				std::cout << "Entered Manager is already exist\n\n"; 
+				waitMenu(); 
+				return false;
+			}
 		}
-		else if (rc == 19) {
-			std::cout << "Entered Manager is already exist\n\n";
-			waitMenu(); 
-			return false; 
+		else {
+			return false;
 		}
+		
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;

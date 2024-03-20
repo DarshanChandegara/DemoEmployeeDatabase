@@ -48,7 +48,7 @@ public:
     void setAddress()  { 
         std::string add;
         std::string msg = " Enter # to leave the field Empty\n"; 
-        std::cout << "Enter address: "+msg;
+        //std::cout << "Enter address: "+msg;
         std::cin.ignore(); 
         std::getline(std::cin, add);
         if (add == "#") add = "";

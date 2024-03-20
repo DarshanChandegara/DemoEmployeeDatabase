@@ -33,16 +33,16 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\EmployeeDatabase; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\EmployeeDatabase; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\EmployeeDatabase; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\EmployeeDatabase; $(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -59,8 +59,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Employee;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Engineer;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Manager;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Salary;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Department;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\DBmanage;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -77,8 +77,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Employee;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Engineer;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Manager;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Salary;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Department;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\DBmanage;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,8 +96,8 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Employee;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Engineer;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Manager;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Salary;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Department;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\DBmanage;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -115,12 +115,13 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Employee;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Engineer;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Manager;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Salary;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\Department;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\DBmanage;C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Fixtures\EmployeeFixture.h" />
+    <ClInclude Include="Fixtures\EngineerFixture.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
