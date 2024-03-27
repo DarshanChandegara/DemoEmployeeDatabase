@@ -5,7 +5,7 @@ void action(int j);
 
 void menu() noexcept {
 	auto flag{ true };
-	Salary s;
+	Model::Salary s;
 	while (flag) { 
 		system("cls");
 		std::cout << "Select The Table You want to interact \n";
@@ -16,7 +16,7 @@ void menu() noexcept {
 		std::cout << "5. To exit \n\n"; 
 
 		int i;  
-		i = std::stoi(input("Enter Your Choice : ", std::regex{"[1-5]"}));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{"[1-5]"}).value_or("5"));
 
 		switch (i) { 
 		case 1:  case 2:  case 3:

@@ -159,7 +159,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Table.cpp" />
     <ClInclude Include="include\Helper.h" />
+    <ClInclude Include="include\LOG\fileHelper.h" />
+    <ClInclude Include="include\LOG\log.h" />
+    <ClInclude Include="include\LOG\logger.h" />
+    <ClInclude Include="include\LOG\utility.h" />
+    <ClInclude Include="include\Model\Table.h" />
     <ClInclude Include="include\Regex.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sqlite\shell.c" />
@@ -184,6 +190,13 @@
     <ClInclude Include="sqlite\sqlite3ext.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BackUp\darshan.csv" />
+    <None Include="BackUp\demo.csv" />
+    <None Include="BackUp\Department.csv" />
+    <None Include="BackUp\Employee.csv" />
+    <None Include="BackUp\Engineer.csv" />
+    <None Include="BackUp\Manager.csv" />
+    <None Include="BackUp\Salary.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

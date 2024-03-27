@@ -1,6 +1,6 @@
 #include "../include/Model/Employee.h"
 
-bool Employee::viewEmployee() {
+bool Model::Employee::viewEmployee() {
 
 	try {
 
@@ -16,7 +16,7 @@ bool Employee::viewEmployee() {
 		std::cout << "5. Manager Id\n";
 		std::cout << "6. ALL\n\n";
 		int i;
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-6]" }));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-6]" }).value_or("0"));
 		std::string tmp;
 		while (1) {
 			switch (i) {
@@ -27,36 +27,36 @@ bool Employee::viewEmployee() {
 				std::cout << "Enter Eid: ";
 				std::cin >> tmp;
 				query += "Eid = " + tmp + ";";
-				Database::getInstance().selectQuery(query.c_str());
+				DB::Database::getInstance().selectQuery(query.c_str());
 				break;
 			case 2:
 				std::cout << "Enter fname: ";
 				std::cin >> tmp;
 				query += "firstname = '" + tmp + "';";
-				Database::getInstance().selectQuery(query.c_str());
+				DB::Database::getInstance().selectQuery(query.c_str());
 				break;
 			case 3:
 				std::cout << "Enter email: ";
 				std::cin >> tmp;
 				query += "email = '" + tmp + "';";
-				Database::getInstance().selectQuery(query.c_str());
+				DB::Database::getInstance().selectQuery(query.c_str());
 				break;
 			case 4:
 				std::cout << "Enter departmaent name: ";
 				std::cin >> tmp;
 				join += "SELECT Employee.* FROM Employee JOIN Department ON Employee.department_id = Department.id WHERE Dname = '" + tmp + "' ;";
 				//std::cout << join;
-				Database::getInstance().selectQuery(join.c_str());
+				DB::Database::getInstance().selectQuery(join.c_str());
 				break;
 			case 5:
 				std::cout << "Enter Manager Id: ";
 				std::cin >> tmp;
 				query += "manager_id = '" + tmp + "';";
-				Database::getInstance().selectQuery(query.c_str());
+				DB::Database::getInstance().selectQuery(query.c_str());
 				break;
 			case 6:
 				all += "select * from Employee";
-				Database::getInstance().selectQuery(all.c_str());
+				DB::Database::getInstance().selectQuery(all.c_str());
 				break;
 			default:
 				std::cout << "Enter valid field\n";
@@ -65,7 +65,7 @@ bool Employee::viewEmployee() {
 			}
 			break;
 		}
-		if (Database::row == 0) {
+		if (DB::Database::row == 0) {
 			return false;
 		}
 		return true;
@@ -78,7 +78,7 @@ bool Employee::viewEmployee() {
 
 }
 
-bool Employee::insertEmployee() {
+bool Model::Employee::insertEmployee() {
 	try {
 
 		std::string query = "INSERT INTO Employee "
@@ -94,15 +94,16 @@ bool Employee::insertEmployee() {
 			query += "Other";
 		}
 		query += "' , '" + doj + "', " + std::to_string(manager_id) + ", " + std::to_string(department_id) + "); ";
-
-		s.insertSalary(getId()); 
-		int rc = Database::getInstance().executeQuery(query.c_str());
+		
+		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 		if (rc == 0) {
-			std::cout << "Employee inserted successfully";
+			std::cout << "\x1b[32mEmployee inserted successfully\x1b[0m\n";
+			logging::Info("Employee added for Id: ", std::to_string(getId()));  
+			s.insertSalary(getId()); 
 			return true;
 		}
 		else if (rc == 19) {
-			std::cout << "Entered manager or department is not available in particular table Or entered employee is already exist \n\n";
+			std::cout << "\x1b[33mEntered manager or department is not available in particular table Or entered employee is already exist \x1b[0m\n\n";
 			waitMenu();
 			return false;
 		}
@@ -115,24 +116,22 @@ bool Employee::insertEmployee() {
 	}
 }
 
-bool Employee::updateEmployee() {
+bool Model::Employee::updateEmployee() {
 	try {
 		std::string query = "update Employee set ";
-		std::cout << "Enter the Eid to update Employee\n";
-		std::string tmp;
-		std::cin >> tmp;
+		setId(std::stoi(input("Enter the Eid to update Employee : " , idRegex).value_or("0")));
 
-		std::string select = "select * from Employee where Eid = " + tmp + " ;";
-		Database::getInstance().selectQuery(select.c_str());
-		if (Database::row == 0) {
-			std::cout << "Entered Department is not in database\n\n";
+		std::string select = "select * from Employee where Eid = " + std::to_string(getId()) + " ;";
+		DB::Database::getInstance().selectQuery(select.c_str());
+		if (DB::Database::row == 0) {
+			std::cout << "Entered Employee is not in database\n\n";
 			std::cout << "Press 0 to continue\n";
 			int i;
 			std::cin >> i;
-			updateEmployee();
+			return false;
 		}
 		else {
-			std::map<std::string, std::string> mp;
+			std::unordered_map<std::string, std::string> mp;
 			bool check = true;
 			int i;
 			while (check) {
@@ -150,58 +149,59 @@ bool Employee::updateEmployee() {
 				std::cout << "10. departmentId\n";
 				std::cout << "11. toUpdateDatabase\n";
 				std::string value;
-				i = std::stoi(input("Enter Your Choice : ", std::regex{ "^[0-9]$|^1[0-1]$" }));
+				i = std::stoi(input("Enter Your Choice : ", std::regex{ "^[0-9]$|^1[0-1]$" }).value_or(0));
 				switch (i) {
 				case 0:
 					return true;
 
 				case 1:
-					setFirstname(input("Enter firstname: ", alphaRegex));
+					//setFirstname(input("Enter firstname: ", alphaRegex).value_or(""));
 					mp.insert({ "firstname" , firstname });
 					break;
 
 				case 2:
-					setLastname(input("Enter LastName: " , alphaRegex));
+					//setLastname(input("Enter LastName: " , alphaRegex).value_or(""));
 					mp.insert({ "lastname" ,  lastname }); 
 					break;
 
 				case 3:
-					setDob(input("Enter DOB (dd-mm-yyyy): " , dateRegex));
+					//setDob(input("Enter DOB (dd-mm-yyyy): " , dateRegex).value_or(""));
 					mp.insert({ "dob" , dob }); 
 					break;
 
 				case 4:
-					setMobile(input("Enter Mobile: " , mobileRegex));
+					//setMobile(input("Enter Mobile: " , mobileRegex).value_or(""));
 					mp.insert({ "mobile" , mobile });
 					break;
 
 				case 5:
-					setEmail(input("Enter Email: ", emailRegex));
+					//setEmail(input("Enter Email: ", emailRegex).value_or(""));
 					mp.insert({ "email" , email });
 					break;
 
 				case 6:
-					setAddress();
+					//setAddress();
 					mp.insert({ "address" , address });
 					break;
 
 				case 7:
-					value = input("Enter Gender (Male/Female/Other: )", genderRegex);
-					mp.insert({ "gender" , value });
+					/*value = input("Enter Gender (Male/Female/Other: )", genderRegex).value_or("Other");
+					mp.insert({ "gender" , value });*/
+					mp.insert({"gender" , "Male"});
 					break;
 
 				case 8:
-					setDoj(input("Enter DOJ(dd-mm-yyyy): ", dateRegex));
+					//setDoj(input("Enter DOJ(dd-mm-yyyy): ", dateRegex).value_or(""));
 					mp.insert({ "doj" , doj }); 
 					break;
 
 				case 9:
-					setManagerId(stoi(input("Enter Manager Id: ", idRegex))); 
+					//setManagerId(stoi(input("Enter Manager Id: ", idRegex).value_or("0")));
 					mp.insert({ "manager_id" , std::to_string(manager_id) });
 					break;
 
 				case 10:
-					setDepartmentId(stoi(input("Enter Department Id: ", idRegex))); 
+					//setDepartmentId(stoi(input("Enter Department Id: ", idRegex).value_or("0")));
 					mp.insert({ "department_id" , std::to_string(department_id)});
 					break;
 
@@ -212,42 +212,51 @@ bool Employee::updateEmployee() {
 			}
 
 			auto itr = mp.end();
-			itr--;
+			if(mp.size() != 0) itr--;
+
 			for (auto it = mp.begin(); it != mp.end(); ++it) {
-				query += it->first + " = ";
-				if (it->first == "manager_id" || it->first == "department_id") {
-					query += it->second + " ";
+
+				auto& [field, value] = *it;
+
+				query += field + " = "; 
+				if (field == "manager_id" || field == "department_id") {
+					query += value + " ";
 				}
 				else {
-					query += "'" + it->second + "' ";
+					query += "'" + value + "' ";
 				}
 
 				if (it != itr)
 					query += ",";
 			}
-			query += "where Eid = " + tmp + " ;";
+			query += "where Eid = " + std::to_string(getId()) + " ;";  
+
 			//std::cout << query << "\n";
-			int rc = Database::getInstance().executeQuery(query.c_str());
+			
+			int rc = DB::Database::getInstance().executeQuery(query.c_str());
 			if (rc == 0) {
-				std::cout << "Employee updated successfully\n\n";
+				std::cout << "\x1b[32mEmployee updated successfully\x1b[0m\n\n";
 				waitMenu();
+				logging::Info("Employee updated for Id: ", std::to_string(getId()));  
 				return true;
 			}
 			else if (rc == 19) {
-				std::cout << "You can not assign value beacuse entered manager or department is not in particular table\n\n";
+				std::cout << "\x1b[33mYou can not assign value beacuse entered manager or department is not in particular table\x1b[0m\n\n";
 				waitMenu();
 				return false;
 			}
 		}
+		return false;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
-bool Employee::deleteEmployee() {
+bool Model::Employee::deleteEmployee() {
 	try {
 		system("cls");
 		std::string query1 = "delete from Employee where ";
@@ -260,7 +269,7 @@ bool Employee::deleteEmployee() {
 		std::cout << "1. Eid\n";
 		std::cout << "2. email\n\n";
 
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-2]" }));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-2]" }).value_or("0"));
 		std::cout << "\n";
 		std::string tmp;
 		while (1) {
@@ -269,16 +278,13 @@ bool Employee::deleteEmployee() {
 				return true;
 
 			case 1:
-				std::cout << "Enter Eid: ";
-				std::cin >> tmp;
-				query1 += "Eid = " + tmp + ";";
+				setId(std::stoi(input("Enter Eid: " , idRegex).value_or("0")));
+				query1 += "Eid = " + std::to_string(getId()) + ";";
 				break;
 
 			case 2:
-				std::cout << "Enter email: ";
-				std::cin >> tmp;
-				query1 += "email = '" + tmp + "';";
-
+				setEmail(input("Enter email: ",emailRegex).value_or(""));
+				query1 += "email = '" + getEmail() + "';";
 				break;
 
 			default:
@@ -290,26 +296,27 @@ bool Employee::deleteEmployee() {
 		}
 		//std::cout << query1 << "\n";
 
-		int rc = Database::getInstance().executeQuery(query1.c_str());
+		int rc = DB::Database::getInstance().executeQuery(query1.c_str());
 		if (rc == 0) {
-			int change = sqlite3_changes(Database::getInstance().db);
+			int change = sqlite3_changes(DB::Database::getInstance().db);
 			if (change == 0) {
-				std::cout << "Selected Employee is not in database\n";
+				std::cout << "\x1b[33mSelected Employee is not in database\x1b[0m\n";
 				waitMenu(); 
 				return false;
 			}
 			else {
-				std::cout << "Employee Deleted successfully\n\n";
+				std::cout << "\x1b[32mEmployee Deleted successfully\x1b[0m\n\n";
 				waitMenu();
+				logging::Info("Employee deleted for Id: ", std::to_string(getId())); 
 				return true;
 			}
 		}
 		else if (rc == 19) {
-			std::cout << "You can not delete this Employee because this is a manager of other employees \n\n";
+			std::cout << "\x1b[33mYou can not delete this Employee because this is a manager of other employees \x1b[0m\n\n";
 			waitMenu();
 			return false;
 		}
-		
+		return false;
 
 	}
 	catch (std::exception& e) {
@@ -317,25 +324,26 @@ bool Employee::deleteEmployee() {
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
-void Employee::action() noexcept {
+void Model::Employee::action() noexcept {
 
 }
 
-void Employee::userInputEmployee() {
+void Model::Employee::userInputEmployee() {
 	try {
 
-		std::string msg = " Enter # to leave the field Empty\n";
-		setId(stoi(input("Enter Eid: ", idRegex)));
-		setFirstname(input("Enter FirstName: " + msg, alphaRegex));
-		setLastname(input("Enter LastName: " + msg, alphaRegex));
-		setDob(input("Enter DOB (dd-mm-yyyy): " + msg, dateRegex));
-		setMobile(input("Enter Mobile: " + msg, mobileRegex));
-		setEmail(input("Enter Email: " + msg, emailRegex));
+		std::string msg = " Enter # to leave the field Empty: \n";
+		setId(stoi(input("Enter Eid: ", idRegex).value_or("0")));
+		setFirstname(input("Enter FirstName OR " + msg, alphaRegex).value_or(""));
+		setLastname(input("Enter LastName OR " + msg, alphaRegex).value_or(""));
+		setDob(input("Enter DOB (dd-mm-yyyy) OR " + msg, dateRegex).value_or(""));
+		setMobile(input("Enter Mobile OR " + msg, mobileRegex).value_or(""));
+		setEmail(input("Enter Email OR " + msg, emailRegex).value_or(""));
 		setAddress();
 
-		string gender = input("Enter Gender(Male / Female / Other): ", genderRegex);
+		string gender = input("Enter Gender(Male / Female / Other): ", genderRegex).value_or("Other");
 		if (gender == "Male") {
 			setGender(Gender::Male);
 		}
@@ -346,9 +354,9 @@ void Employee::userInputEmployee() {
 			setGender(Gender::Other);
 		}
 
-		setDoj(input("Enter DOJ(dd-mm-yyyy): " + msg, dateRegex));
-		setManagerId(stoi(input("Enter Manager Id: ", idRegex)));
-		setDepartmentId(stoi(input("Enter Department Id: ", idRegex)));
+		setDoj(input("Enter DOJ(dd-mm-yyyy) OR " + msg, dateRegex).value_or(""));
+		setManagerId(stoi(input("Enter Manager Id: ", idRegex).value_or("0")));
+		setDepartmentId(stoi(input("Enter Department Id: ", idRegex).value_or("0")));
 		s.userInputSalary();
 	}
 	catch (std::exception& e) {

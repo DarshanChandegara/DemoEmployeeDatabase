@@ -2,36 +2,46 @@
 #define _HELPER_
 
 #include<iostream>
+#include<filesystem>
 #include<string>
 #include<regex>
+#include<optional>
 
-inline std::regex rg{ ".*" };
+namespace utility {
 
-inline std::string input(const std::string prompt, const std::regex& r = rg) { 
-	std::string input;
-	while (true) {
-		std::cout << prompt; 
-		std::cin >> input;
+	inline std::optional<std::string> input(const std::string prompt, const std::regex& r, bool flag = false) {
+		std::string input;
+		auto cnt{ 0 };
+		while (true) {
+			if (cnt > 3) {
+				break;
+			}
+			std::cout << prompt;
+			std::getline(std::cin, input);
 
-		if (!std::regex_match(input, r)) {
-			std::cout << "\x1b[31mEnter valid input\x1b[0m\n";
+			if (input == "#" && flag == false) return "";
+			else if (input == "#" && flag == true) return "0";
+			if (!std::regex_match(input, r)) {
+				std::cout << "\x1b[38;5;208mEnter valid input\x1b[0m\n";
+				cnt++;
+			}
+			else {
+				return input;
+			}
 		}
-		else {
-			break;
-		}
+		return std::nullopt;
 	}
-	if (input == "#") return "";
-	return input;
-}
 
-inline  std::string fun() {
-	return "darshan";
-}
+	inline  std::string fun() {
+		return "darshan";
+	}
 
-inline void waitMenu() {
-	std::cout << "Press 0 to continue....\n"; 
-	int i; 
-	std::cin >> i; 
+	inline void waitMenu() {
+		std::cout << "Press 0 to continue....\n";
+		int i;
+		std::cin >> i;
+		std::cin.get();
+	}
 }
 
 #endif
