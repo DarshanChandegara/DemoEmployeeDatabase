@@ -1,16 +1,23 @@
 #include "../include/Model/Salary.h"
 
-void Model::Salary::userInputSalary(){
+bool Model::Salary::userInputSalary(){
 
 	try {
 		std::string msg = " Enter # to leave the field Empty: \n"; 
-		setBaseSalary(std::stof(input("Enter Base Salary OR " + msg, salaryRegex, true).value_or("0"))); 
-		setBonus(std::stof(input("Enter Bonus OR ", salaryRegex, true).value_or("0"))); 
+
+		if (auto tmp = input("Enter Base Salary OR " + msg, salaryRegex, true); tmp.has_value()) setBaseSalary(std::stof(tmp.value()));
+		else return false;
+
+		if (auto tmp = input("Enter Bonus OR " + msg, salaryRegex, true); tmp.has_value()) setBonus(std::stof(tmp.value())); 
+		else return false;
+
 		setAmount(base_salary + bonus); 
+		return true;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		waitMenu();
+		waitMenu(); 
+		return false;
 	}
 }
 
@@ -83,7 +90,7 @@ bool Model::Salary::updateSalary() {
 	try {
 		system("cls");
 
-		setId(std::stoi(input( "Enter the Eid to update Salary : ",idRegex).value_or("0")));
+		setId(std::stoi(input( "Enter the Eid to update Salary : ",idRegex).value()));
 
 		std::string select = "select * from Salary where Sid = " + std::to_string(getId()) + " ;";
 		DB::Database::getInstance().selectQuery(select.c_str());
@@ -123,16 +130,31 @@ bool Model::Salary::updateSalary() {
 					return true;
 
 				case 1:
-					setBaseSalary(std::stof(input("Enter Base Salary: ", salaryRegex).value_or("0")));  
+					if (auto tmp = input("Enter Base Salary: ", salaryRegex, true); tmp.has_value()) setBaseSalary(std::stof(tmp.value()));
+					else {
+						std::cout << "\x1b[33m Updation Fail!!! \x1b[0m\n";
+						waitMenu(); 
+						return false;
+					}
 					break;
 
 				case 2:
-					setBonus(std::stof(input("Enter Bonus: ", salaryRegex).value_or("0"))); 
+					if (auto tmp = input("Enter Bonus: ", salaryRegex, true); tmp.has_value()) setBonus(std::stof(tmp.value())); 
+					else {
+						std::cout << "\x1b[33m Updation Fail!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					break;
 
 				case 3:
-					value = input("Enter Percantage by which you want to increase the salary :" , salaryRegex).value_or("0");
-					increment(std::stof(value), getId());
+					if (auto tmp = input("Enter Precentage By which you want to : ", salaryRegex, true); tmp.has_value()) increment(std::stof(tmp.value()), getId()); 
+					else {
+						std::cout << "\x1b[33m Updation Fail!!! \x1b[0m\n";  
+						waitMenu();  
+						return false;
+					}
+					
 					break;
 
 				case 4:
@@ -158,6 +180,7 @@ bool Model::Salary::updateSalary() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
 		waitMenu();
 		return false;
 	}
@@ -177,7 +200,7 @@ void Model::Salary::action() noexcept {
 		std::cout << "3. Go to Main Menu\n\n";
 
 		int i;
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-3]" }).value_or("3"));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-3]" }).value_or("3")); 
 		switch (i) {
 		case 1:
 			viewSalary();

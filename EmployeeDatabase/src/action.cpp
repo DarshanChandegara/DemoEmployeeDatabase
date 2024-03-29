@@ -1,7 +1,7 @@
 #include "../include/Model/Department.h"
 #include "../include/Model/Engineer.h" 
 #include "../include/Model/Manager.h"
-
+#include "../include/controllers/departmentController.h"
 using namespace std;
 
 void action(int j) noexcept {
@@ -16,7 +16,7 @@ void action(int j) noexcept {
 		std::cout << "5. Go to Main Menu\n\n";
 
 		int i;
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-5]" }).value_or(5));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-5]" }).value_or("5"));
 		Model::Engineer e;
 		Model::Manager m;
 		Model::Department d;
@@ -72,12 +72,21 @@ void action(int j) noexcept {
 		case 3:
 			switch (i) {
 			case 1:
-				d.viewDepartment();
+				d.viewDepartment(); 
 				break;
 
 			case 2:
-				d.insertDepartment();
+			{
+				auto d1 = userinputDepartment();
+				if (d1.has_value())
+					d1.value().insertDepartment();
+				else {
+					std::cout << "\x1b[33mInsertion Failed!!!!\x1b[0m\n";
+					waitMenu();
+				}
+
 				break;
+			}
 
 			case 3:
 				d.updateDepartment();

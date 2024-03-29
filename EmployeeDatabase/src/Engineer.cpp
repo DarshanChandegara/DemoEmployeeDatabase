@@ -1,16 +1,24 @@
 #include "../include/Model/Engineer.h"
 
-void Model::Engineer::userInputEngineer() {
+bool Model::Engineer::userInputEngineer() {
 	try {
 		std::string msg = " Enter # to leave the field Empty: \n";
 		system("cls");
-		userInputEmployee();
-		setProgramming_language(input("Enter Programming Language  OR " + msg ,allRegex).value_or(""));
-		setSpecialization();
+
+		if (!userInputEmployee()) return false;
+		 
+		if (auto tmp = input("Enter Email OR "+msg, allRegex); tmp.has_value()) setProgramming_language(tmp.value()); 
+		else return false;
+		
+		if (auto tmp = input("Enter Specialization OR "+msg, allRegex); tmp.has_value()) setSpecialization(tmp.value()); 
+		else return false;
+		
+		return true;
 	}
 	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
-		waitMenu();
+		//std::cout << e.what() << std::endl;
+		//waitMenu();
+		return false;
 	}
 }
 
@@ -81,6 +89,8 @@ bool Model::Engineer::viewEngineer() {
 			int rc = DB::Database::getInstance().selectQuery(query1.c_str());
 		}
 		if (DB::Database::row == 0) {
+			std::cout << "\x1b[33m Selected Engineer is not available!!! \x1b[0m\n";
+			waitMenu();  
 			return false;
 		}
 		waitMenu();
@@ -98,10 +108,16 @@ bool Model::Engineer::insertEngineer() {
 		system("cls");
 		std::cout << "If you want to go back press 0 Otherwise press 1\n";
 		int i;
-		if (std::cin >> i;  i == 0) {
+		if (i = std::stoi(input("", std::regex{ "^[0-1]$" }).value_or("0"));  i == 0) {
 			return true;
 		}
-		userInputEngineer(); 
+		bool flag = userInputEngineer(); 
+
+		if (!flag) {
+			std::cout << "\x1b[33m Insertion Failed!!! \x1b[0m\n";
+			waitMenu();
+			return false;
+		}
 
 		if (auto ch = insertEmployee(); ch) {
 			std::string query = "";
@@ -138,15 +154,13 @@ bool Model::Engineer::updateEngineer() {
 
 		std::string query1 = "update Employee set ";
 		std::string query2 = "update Engineer set ";
-		setId(std::stoi(input("Enter the Eid to update Engineer : ",idRegex).value_or("0")));
+		setId(std::stoi(input("Enter the Eid to update Engineer : ",idRegex).value()));
 
 		std::string select = "select * from Engineer where id = " + std::to_string(getId()) + " ;";
 		DB::Database::getInstance().selectQuery(select.c_str());
 		if (DB::Database::row == 0) {
 			std::cout << "Entered Engineer is not in database\n\n";
-			std::cout << "Press 0 to continue\n";
-			int i;
-			std::cin >> i;
+			waitMenu();
 			return false;
 		}
 		else {
@@ -178,62 +192,147 @@ bool Model::Engineer::updateEngineer() {
 					return true;
 
 				case 1:
-					setFirstname(input("Enter firstname: ", alphaRegex).value_or(""));
-					mp1.insert({ "firstname" , getFirstname() });
+
+					if (auto tmp = input("Enter FirstName: ", alphaRegex); tmp.has_value()) setFirstname(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					} 
+					mp1.erase("firstname");
+					mp1.insert({ "firstname" , getFirstname()});
 					break;
 
 				case 2:
-					setLastname(input("Enter LastName: ", alphaRegex).value_or(""));
-					mp1.insert({ "lastname" ,  getLastname() });
+					if (auto tmp = input("Enter LastName: ", alphaRegex); tmp.has_value()) setLastname(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("lastname");
+					mp1.insert({ "lastname" ,  getLastname()});
 					break;
 
 				case 3:
-					setDob(input("Enter DOB (dd-mm-yyyy): ", dateRegex).value_or(""));
-					mp1.insert({ "dob" , getDob() });
+					if (auto tmp = input("Enter DOB (dd-mm-yyyy): ", dateRegex); tmp.has_value()) setDob(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("dob");
+					mp1.insert({ "dob" , getDob()}); 
 					break;
 
 				case 4:
-					setMobile(input("Enter Mobile: ", mobileRegex).value_or(""));
-					mp1.insert({ "mobile" , getMobile() });
+					if (auto tmp = input("Enter Mobile OR: ", mobileRegex); tmp.has_value()) setMobile(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("mobile");
+					mp1.insert({ "mobile" , getMobile()});
 					break;
 
 				case 5:
-					setEmail(input("Enter Email: ", emailRegex).value_or(""));
-					mp1.insert({ "email" , getEmail() });
+					if (auto tmp = input("Enter Email: ", emailRegex); tmp.has_value()) setEmail(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("email");
+					mp1.insert({ "email" , getEmail()});
 					break;
 
 				case 6:
-					setAddress(); 
-					mp1.insert({ "address" , getAddress() });
+					if (auto tmp = input("Enter Address: ", allRegex); tmp.has_value()) setAddress(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("address");
+					mp1.insert({ "address" , getAddress()});
 					break;
 
 				case 7:
-					value = input("Enter Gender (Male/Female/Other: )", genderRegex).value_or("Other");
-					mp1.insert({ "gender" , value });
+				{
+					auto gender = input("Enter Gender(Male / Female / Other): ", genderRegex);
+					if (gender.has_value()) {
+						if (gender.value() == "Male") {
+							setGender(Gender::Male);
+						}
+						else if (gender.value() == "Female") {
+							setGender(Gender::Female);
+						}
+						else {
+							setGender(Gender::Other);
+						}
+					}
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("gender");
+					mp1.insert({ "gender" , gender.value() }); 
 					break;
+				}
 
 				case 8:
-					setDoj(input("Enter DOJ(dd-mm-yyyy): ", dateRegex).value_or(""));
-					mp1.insert({ "doj" , getDoj() });
+					if (auto tmp = input("Enter DOJ(dd-mm-yyyy): ", dateRegex); tmp.has_value())  setDoj(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("doj");
+					mp1.insert({ "doj" , getDoj()});
 					break;
+
 				case 9:
-					setManagerId(stoi(input("Enter Manager Id: ", idRegex).value_or("0")));
-					mp1.insert({ "manager_id" , std::to_string(getManagerId()) });
+					if (auto tmp = input("Enter Manager Id: ", idRegex); tmp.has_value()) setManagerId(stoi(tmp.value()));
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp1.erase("manager_id");
+					mp1.insert({ "manager_id" , std::to_string(getManagerId()) }); 
 					break;
 
 				case 10:
-					setDepartmentId(stoi(input("Enter Department Id: ", idRegex).value_or("0")));
+					if (auto tmp = input("Enter Department Id: ", idRegex); tmp.has_value()) setDepartmentId(stoi(tmp.value()));
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					} 
+					mp1.erase("department_id"); 
 					mp1.insert({ "department_id" , std::to_string(getDepartmentId()) });
 					break;
 
 				case 11:
-					setProgramming_language(input("Enter Programming Language: ",allRegex).value_or(""));
+					if (auto tmp = input("Enter Programming Language: ", allRegex); tmp.has_value()) setProgramming_language(tmp.value()); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp2.erase("programming_language");
-					mp2.insert({ "programming_language" , value });
+					mp2.insert({ "programming_language" , getProgrammingLanguage()}); 
 					break;
 
 				case 12:
-					setSpecialization();
+					if (auto tmp = input("Enter Programming Language: ", allRegex); tmp.has_value()) setSpecialization(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp2.erase("specialization");
 					mp2.insert({ "specialization" , getSpecialization() });
 					break;
@@ -307,6 +406,7 @@ bool Model::Engineer::updateEngineer() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
 		waitMenu();
 		return false;
 	}

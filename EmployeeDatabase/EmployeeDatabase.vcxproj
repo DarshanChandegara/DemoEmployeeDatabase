@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Table.cpp" />
+    <ClInclude Include="include\controllers\departmentController.h" />
     <ClInclude Include="include\Helper.h" />
     <ClInclude Include="include\LOG\fileHelper.h" />
     <ClInclude Include="include\LOG\log.h" />

@@ -24,9 +24,6 @@
     <ClCompile Include="sqlite\sqlite3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\DBmanage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Department.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,6 +43,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\action.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBmanage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Table.cpp">
@@ -83,30 +83,33 @@
     <ClInclude Include="include\Helper.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LOG\utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\LOG\logger.h">
+    <ClInclude Include="include\LOG\fileHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\LOG\log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\LOG\fileHelper.h">
+    <ClInclude Include="include\LOG\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LOG\utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Model\Table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\controllers\departmentController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="BackUp\darshan.csv" />
     <None Include="BackUp\demo.csv" />
     <None Include="BackUp\Department.csv" />
     <None Include="BackUp\Employee.csv" />
     <None Include="BackUp\Engineer.csv" />
     <None Include="BackUp\Manager.csv" />
     <None Include="BackUp\Salary.csv" />
+    <None Include="BackUp\darshan.csv" />
   </ItemGroup>
 </Project>

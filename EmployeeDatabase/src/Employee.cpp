@@ -16,7 +16,7 @@ bool Model::Employee::viewEmployee() {
 		std::cout << "5. Manager Id\n";
 		std::cout << "6. ALL\n\n";
 		int i;
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-6]" }).value_or("0"));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-6]" }).value_or("0")); 
 		std::string tmp;
 		while (1) {
 			switch (i) {
@@ -99,8 +99,7 @@ bool Model::Employee::insertEmployee() {
 		if (rc == 0) {
 			std::cout << "\x1b[32mEmployee inserted successfully\x1b[0m\n";
 			logging::Info("Employee added for Id: ", std::to_string(getId()));  
-			s.insertSalary(getId()); 
-			return true;
+			return s.insertSalary(getId());  
 		}
 		else if (rc == 19) {
 			std::cout << "\x1b[33mEntered manager or department is not available in particular table Or entered employee is already exist \x1b[0m\n\n";
@@ -118,8 +117,8 @@ bool Model::Employee::insertEmployee() {
 
 bool Model::Employee::updateEmployee() {
 	try {
-		std::string query = "update Employee set ";
-		setId(std::stoi(input("Enter the Eid to update Employee : " , idRegex).value_or("0")));
+		std::string query = "update Employee set "; 
+		setId(std::stoi(input("Enter the Eid to update Employee : " , idRegex).value()));  
 
 		std::string select = "select * from Employee where Eid = " + std::to_string(getId()) + " ;";
 		DB::Database::getInstance().selectQuery(select.c_str());
@@ -149,59 +148,122 @@ bool Model::Employee::updateEmployee() {
 				std::cout << "10. departmentId\n";
 				std::cout << "11. toUpdateDatabase\n";
 				std::string value;
-				i = std::stoi(input("Enter Your Choice : ", std::regex{ "^[0-9]$|^1[0-1]$" }).value_or(0));
+				i = std::stoi(input("Enter Your Choice : ", std::regex{ "^[0-9]$|^1[0-1]$" }).value_or("0"));
 				switch (i) {
 				case 0:
 					return true;
 
 				case 1:
-					//setFirstname(input("Enter firstname: ", alphaRegex).value_or(""));
+
+					if (auto tmp = input("Enter FirstName: ", alphaRegex); tmp.has_value()) setFirstname(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu();
+						return false;
+					}
 					mp.insert({ "firstname" , firstname });
 					break;
 
 				case 2:
-					//setLastname(input("Enter LastName: " , alphaRegex).value_or(""));
+					if (auto tmp = input("Enter LastName: ", alphaRegex); tmp.has_value()) setLastname(tmp.value()); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp.insert({ "lastname" ,  lastname }); 
 					break;
 
 				case 3:
-					//setDob(input("Enter DOB (dd-mm-yyyy): " , dateRegex).value_or(""));
+					if (auto tmp = input("Enter DOB (dd-mm-yyyy): ", dateRegex); tmp.has_value()) setDob(tmp.value()); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp.insert({ "dob" , dob }); 
 					break;
 
 				case 4:
-					//setMobile(input("Enter Mobile: " , mobileRegex).value_or(""));
+					if (auto tmp = input("Enter Mobile OR: ", mobileRegex); tmp.has_value()) setMobile(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu();  
+						return false;
+					}
 					mp.insert({ "mobile" , mobile });
 					break;
 
 				case 5:
-					//setEmail(input("Enter Email: ", emailRegex).value_or(""));
+					if (auto tmp = input("Enter Email: ", emailRegex); tmp.has_value()) setEmail(tmp.value()); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp.insert({ "email" , email });
 					break;
 
 				case 6:
-					//setAddress();
+					if (auto tmp = input("Enter Address: ", allRegex); tmp.has_value()) setAddress(tmp.value()); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp.insert({ "address" , address });
 					break;
 
 				case 7:
-					/*value = input("Enter Gender (Male/Female/Other: )", genderRegex).value_or("Other");
-					mp.insert({ "gender" , value });*/
-					mp.insert({"gender" , "Male"});
+				{
+					auto gender = input("Enter Gender(Male / Female / Other): ", genderRegex);
+					if (gender.has_value()) {
+						if (gender.value() == "Male") {
+							setGender(Gender::Male);
+						}
+						else if (gender.value() == "Female") {
+							setGender(Gender::Female);
+						}
+						else {
+							setGender(Gender::Other);
+						}
+					}
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
+					mp.insert({ "gender" , gender.value() });
 					break;
+				}
 
 				case 8:
-					//setDoj(input("Enter DOJ(dd-mm-yyyy): ", dateRegex).value_or(""));
+					if (auto tmp = input("Enter DOJ(dd-mm-yyyy): ", dateRegex); tmp.has_value())  setDoj(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
+						waitMenu();
+						return false;
+					}
 					mp.insert({ "doj" , doj }); 
 					break;
 
 				case 9:
-					//setManagerId(stoi(input("Enter Manager Id: ", idRegex).value_or("0")));
+					if (auto tmp = input("Enter Manager Id: ", idRegex); tmp.has_value()) setManagerId(stoi(tmp.value()));  
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp.insert({ "manager_id" , std::to_string(manager_id) });
 					break;
 
 				case 10:
-					//setDepartmentId(stoi(input("Enter Department Id: ", idRegex).value_or("0")));
+					if (auto tmp = input("Enter Department Id: ", idRegex); tmp.has_value()) setDepartmentId(stoi(tmp.value())); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu();  
+						return false;
+					}
 					mp.insert({ "department_id" , std::to_string(department_id)});
 					break;
 
@@ -250,6 +312,7 @@ bool Model::Employee::updateEmployee() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		std::cout << "\x1b[33m Updation  Failed!!! \x1b[0m\n";
 		waitMenu();
 		return false;
 	}
@@ -278,12 +341,22 @@ bool Model::Employee::deleteEmployee() {
 				return true;
 
 			case 1:
-				setId(std::stoi(input("Enter Eid: " , idRegex).value_or("0")));
+				if (auto tmp = input("Enter Eid: ", idRegex); tmp.has_value()) setId(std::stoi(tmp.value()));  
+				else {
+					std::cout << "\x1b[33m Deletion Failed!!! \x1b[0m\n"; 
+					waitMenu(); 
+					return false;
+				}
 				query1 += "Eid = " + std::to_string(getId()) + ";";
 				break;
 
 			case 2:
-				setEmail(input("Enter email: ",emailRegex).value_or(""));
+				if (auto tmp = input("Enter Email: ", emailRegex); tmp.has_value()) setEmail(tmp.value()); 
+				else {
+					std::cout << "\x1b[33m Deletion Failed!!! \x1b[0m\n"; 
+					waitMenu(); 
+					return false; 
+				}
 				query1 += "email = '" + getEmail() + "';";
 				break;
 
@@ -321,6 +394,7 @@ bool Model::Employee::deleteEmployee() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		std::cout << "\x1b[33m Deletion Failed!!! \x1b[0m\n";
 		waitMenu();
 		return false;
 	}
@@ -331,36 +405,63 @@ void Model::Employee::action() noexcept {
 
 }
 
-void Model::Employee::userInputEmployee() {
+bool Model::Employee::userInputEmployee() {
 	try {
 
 		std::string msg = " Enter # to leave the field Empty: \n";
-		setId(stoi(input("Enter Eid: ", idRegex).value_or("0")));
-		setFirstname(input("Enter FirstName OR " + msg, alphaRegex).value_or(""));
-		setLastname(input("Enter LastName OR " + msg, alphaRegex).value_or(""));
-		setDob(input("Enter DOB (dd-mm-yyyy) OR " + msg, dateRegex).value_or(""));
-		setMobile(input("Enter Mobile OR " + msg, mobileRegex).value_or(""));
-		setEmail(input("Enter Email OR " + msg, emailRegex).value_or(""));
-		setAddress();
 
-		string gender = input("Enter Gender(Male / Female / Other): ", genderRegex).value_or("Other");
-		if (gender == "Male") {
-			setGender(Gender::Male);
-		}
-		else if (gender == "Female") {
-			setGender(Gender::Female);
+		if (auto tmp = input("Enter Eid: ", idRegex); tmp.has_value()) setId(std::stoi(tmp.value())); 
+		else return false;
+
+		if (auto tmp = input("Enter FirstName OR " + msg, alphaRegex); tmp.has_value()) setFirstname(tmp.value());
+		else return false;
+
+		if (auto tmp = input("Enter LastName OR " + msg, alphaRegex); tmp.has_value()) setLastname(tmp.value()); 
+		else return false;
+
+		if (auto tmp = input("Enter DOB (dd-mm-yyyy) OR " + msg, dateRegex); tmp.has_value()) setDob(tmp.value());
+		else return false;
+
+		if (auto tmp = input("Enter Mobile OR " + msg, mobileRegex); tmp.has_value()) setMobile(tmp.value());
+		else return false;
+
+		if (auto tmp = input("Enter Email OR " + msg, emailRegex); tmp.has_value()) setEmail(tmp.value());
+		else return false;
+
+		if (auto tmp = input("Enter Email OR " + msg, allRegex); tmp.has_value()) setAddress(tmp.value());  
+		else return false;
+
+		auto gender = input("Enter Gender(Male / Female / Other): ", genderRegex); 
+		if (gender.has_value()) {
+			if (gender.value() == "Male") {
+				setGender(Gender::Male); 
+			}
+			else if (gender.value() == "Female") { 
+				setGender(Gender::Female);
+			}
+			else {
+				setGender(Gender::Other); 
+			}
 		}
 		else {
-			setGender(Gender::Other);
+			return false;
 		}
+		
+		if (auto tmp = input("Enter DOJ(dd-mm-yyyy) OR " + msg, dateRegex); tmp.has_value()) setDoj(tmp.value()); 
+		else return false;
 
-		setDoj(input("Enter DOJ(dd-mm-yyyy) OR " + msg, dateRegex).value_or(""));
-		setManagerId(stoi(input("Enter Manager Id: ", idRegex).value_or("0")));
-		setDepartmentId(stoi(input("Enter Department Id: ", idRegex).value_or("0")));
-		s.userInputSalary();
+		if (auto tmp = input("Enter Manager Id: ", idRegex); tmp.has_value()) setManagerId(stoi(tmp.value())); 
+		else return false;
+		
+		if (auto tmp = input("Enter Department Id: ", idRegex); tmp.has_value()) setDepartmentId(stoi(tmp.value()));
+		else return false;
+
+		return s.userInputSalary();
+		
 	}
 	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
-		waitMenu();
+		std::cout << e.what() << std::endl; 
+		waitMenu(); 
+		return false;
 	}
 }

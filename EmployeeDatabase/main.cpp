@@ -11,8 +11,14 @@ using namespace utility;
 void menu();
 
 int main() {
-	logging::default_logger()->setFileFlag(true);    
+	logging::default_logger()->setFileFlag(true);   
 	DB::Database::getInstance().open("employee.db"); 
+
+	auto tables = Model::Table::getAllTables();
+	if (tables.size() == 0) {
+		DB::Database::getInstance().createDefaultTables();
+	}
+
 	auto ch{ true };
 	Model::Table t;
 	
@@ -29,7 +35,7 @@ int main() {
 		std::cout << "7. Exit\n\n";
 
 		int i;
-		i = std::stoi(input("Enter Choice: " , std::regex{"[1-7]"}).value_or(7));
+		i = std::stoi(input("Enter Choice: " , std::regex{"[1-7]"}).value_or("7"));
 		switch (i) {
 		case 1 :
 			t.createTable();

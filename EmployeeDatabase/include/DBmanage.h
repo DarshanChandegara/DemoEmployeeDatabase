@@ -31,6 +31,7 @@ namespace DB {
 		static int row;
 
 		bool open(const char* str);
+		bool createDefaultTables();
 		bool close();
 		int executeQuery(const char* sql, float count = 0);
 		bool selectQuery(const char* sql);
