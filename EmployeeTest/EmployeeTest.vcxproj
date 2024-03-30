@@ -33,16 +33,16 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)EmployeeDatabase;$(WindowsSDK_IncludePath);$(VC_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)EmployeeDatabase;$(WindowsSDK_IncludePath);$(VC_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)EmployeeDatabase;$(WindowsSDK_IncludePath);$(VC_IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\COLLEGE\EmployeeDatabase\EmployeeDatabase;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)EmployeeDatabase;$(WindowsSDK_IncludePath);$(VC_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -59,8 +59,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -77,8 +77,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,8 +96,8 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -115,8 +115,8 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Employee;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Engineer;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Manager;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Salary;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\Department;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\DBmanage;D:\COLLEGE\EmployeeDatabase\bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

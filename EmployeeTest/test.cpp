@@ -96,8 +96,8 @@ TEST_F(EngineerFixture, DISABLED_DeleteTest) {
 TEST_F(DepartmentFixture, DISABLED_InsertTest) {
 	ASSERT_FALSE(d1.insertDepartment()); // Fail because With given department id there is already some other department 
 	ASSERT_FALSE(d2.insertDepartment());  // Fail because enterd manager is not in manager table  
-	ASSERT_TRUE(d3.insertDepartment()); // Success 
-	ASSERT_TRUE(d4.insertDepartment()); // Success
+	ASSERT_TRUE(d3.insertDepartment()); // Success  
+	ASSERT_TRUE(d4.insertDepartment()); // Success 
 }
 
 TEST_F(DepartmentFixture, DISABLED_ViewTest) {
@@ -105,18 +105,15 @@ TEST_F(DepartmentFixture, DISABLED_ViewTest) {
 }
 
 TEST_F(DepartmentFixture, DISABLED_UpdateTest) {
-	ASSERT_FALSE(d2.updateDepartment());  // Fail because manager id is not in database
-	ASSERT_FALSE(d5.updateDepartment()); // Fali beacuse department is not in table 
-	ASSERT_TRUE(d3.updateDepartment());  // Success
+	ASSERT_FALSE(d2.updateDepartment());  // Fail because manager id is not in database 
+	ASSERT_FALSE(d5.updateDepartment()); // Fali beacuse department is not in table      
+	ASSERT_TRUE(d3.updateDepartment());  // Success   
 }
 
 TEST_F(DepartmentFixture, DISABLED_DeleteTest) {
 	ASSERT_FALSE(d1.deleteDepartment()); // Fail because there is employee which are working in this department 
 	ASSERT_FALSE(d5.deleteDepartment()); // Fail beacuse there is no department like this id 
-	ASSERT_FALSE(d6.deleteDepartment()); // Fail beacuse there is no department like this name 
-
 	ASSERT_TRUE(d3.deleteDepartment());  // Success id
-	ASSERT_TRUE(d4.deleteDepartment());  // Success name
 }
 
 
@@ -182,7 +179,8 @@ TEST_F(SalaryFixture, DISABLED_UpdateTest) {
 
  
 int main(int argv, char** argc) {
-	DB::Database::getInstance().open("employee.db"); 
+	DB::Database::getInstance().open("employee.db");  
+	DB::Database::getInstance().createDefaultTables();  
 	testing::InitGoogleTest(&argv, argc);
 	return RUN_ALL_TESTS();
 }

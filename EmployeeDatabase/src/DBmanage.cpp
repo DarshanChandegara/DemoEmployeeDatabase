@@ -4,6 +4,8 @@ int DB::Database::row = 0;
 
 bool DB::Database::open(const char* str) {
 	rc = sqlite3_open(str, &db);
+	const char* pragmaQuery = { "PRAGMA foreign_keys = ON;" };  
+	executeQuery(pragmaQuery); 
 
 	if (rc) {
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));   
@@ -130,9 +132,6 @@ bool DB::Database::createDefaultTables() {
 		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
-
-	const char* pragmaQuery = { "PRAGMA foreign_keys = ON;" };
-	executeQuery(pragmaQuery);
 
 	return true;
 }

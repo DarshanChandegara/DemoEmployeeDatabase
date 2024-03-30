@@ -61,9 +61,11 @@ namespace Model {
         bool insertEmployee();
         bool deleteEmployee();
         bool updateEmployee();
-        bool userInputEmployee();
+        //bool userInputEmployee();
+        static std::optional<Employee> getEmployee(const std::string&);
         void action() noexcept;
 
+        Model::Salary s{};
     private:
         int Eid{};
         std::string firstname{};
@@ -76,7 +78,6 @@ namespace Model {
         std::string doj{};
         int manager_id{};
         int department_id{};
-        Model::Salary s{};
     };
 }
 

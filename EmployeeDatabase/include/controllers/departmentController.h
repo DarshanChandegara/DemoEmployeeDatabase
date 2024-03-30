@@ -1,4 +1,5 @@
 #pragma once
+
 #include "../Model/Department.h"
 #include<optional>
 #include<utility>
@@ -19,10 +20,10 @@ std::optional<Model::Department> userinputDepartment() {
 		if (auto tmp = input("Enter Department Name OR " + msg, allRegex); tmp.has_value()) d.setName(tmp.value());
 		else return std::nullopt;
 
-		if (auto tmp = input("Enter Department Manager ID: ", idRegex); tmp.has_value()) d.setManagerId(std::stoi(tmp.value()));
+		if (auto tmp = input("Enter Manager ID: ", idRegex); tmp.has_value()) d.setManagerId(std::stoi(tmp.value()));
 		else return std::nullopt;
 
-		if (auto tmp = input("Enter Department Name OR " + msg, allRegex); tmp.has_value()) d.setDescription(tmp.value());
+		if (auto tmp = input("Enter Description OR " + msg, allRegex); tmp.has_value()) d.setDescription(tmp.value());
 		else return std::nullopt;
 
 		return d;
@@ -110,17 +111,21 @@ std::optional<std::pair<std::string, std::string>> viewDepartmentController() {
 std::optional<Model::Department> updateDepartmentController() {
 	try {
 		system("cls");
-		std::string query = "update Department set "; 
 		Model::Department d; 
-		d.setId(std::stoi(input("Enter the Did to update Department : ", idRegex).value()));  
+		d.setId(std::stoi(input("Enter the Did to update Department : ", idRegex).value()));   
 
-		std::string select = "select * from Department where id = " + std::to_string(d.getId()) + " ;"; 
+		//std::string select = "select * from Department where id = " + std::to_string(d.getId()) + " ;"; 
+		//std::cout << select << "\n";
+		
+
 		auto tmp = Model::Department::getDepartment(std::to_string(d.getId())); 
-		if (tmp.has_value()) {
-			d = tmp.value(); 
-			bool check = true;
-			int i;
-			while (check) {
+		//std::cout << tmp.value().getId() << "\n";
+		//waitMenu(); 
+		if (tmp.has_value()) { 
+			d = tmp.value();  
+			bool check = true; 
+			int i; 
+			while (check) {  
 				system("cls");
 				std::cout << "Select the field you want to update \n";
 				std::cout << "0. Go Back\n";
@@ -136,8 +141,6 @@ std::optional<Model::Department> updateDepartmentController() {
 				case 1:
 					if (auto tmp = input("Enter Department Name: ", allRegex); tmp.has_value()) d.setName(tmp.value());
 					else {
-						//std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";
-						//waitMenu();
 						return std::nullopt;
 					}
 					break;
@@ -164,6 +167,7 @@ std::optional<Model::Department> updateDepartmentController() {
 			return d;
 		}
 		else {
+			std::cout << "\x1b[33m Departement is not in database!!! \x1b[0m\n";
 			return std::nullopt; 
 		}
 	}
@@ -180,9 +184,8 @@ std::optional<Model::Department> deleteDepartmentController() {
 		std::cout << "Select the Field on which you want to perform delete Operation\n";
 		std::cout << "0. Go Back\n"; 
 		std::cout << "1. Did\n"; 
-		std::cout << "2. Dname\n"; 
 		int i; 
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-2]" }).value_or("0")); 
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-1]" }).value_or("0")); 
 		std::cout << "\n"; 
 		while (1) {
 			switch (i) {
@@ -192,12 +195,6 @@ std::optional<Model::Department> deleteDepartmentController() {
 			case 1:
 				if (auto tmp = input("Enter Department ID: ", idRegex); tmp.has_value()) d.setId(std::stoi(tmp.value()));  
 				else {; 
-					return std::nullopt;  
-				}
-				break;
-			case 2:
-				if (auto tmp = input("Enter Department Name: ", allRegex); tmp.has_value()) d.setName(tmp.value()); 
-				else {
 					return std::nullopt;  
 				}
 				break;
@@ -211,6 +208,6 @@ std::optional<Model::Department> deleteDepartmentController() {
 		return d;
 	}
 	catch(std::exception e) {
-
+		return std::nullopt;
 	}
 }

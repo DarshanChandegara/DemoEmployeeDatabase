@@ -18,17 +18,17 @@ protected:
 		eng.setManagerId(1);
 		eng.setDepartmentId(1);
 
-		std::stringstream input(" Surat Gujarat");
-		std::streambuf* originalCin = std::cin.rdbuf(input.rdbuf());
-		eng.setAddress();
-		std::cin.rdbuf(originalCin);
+		//std::stringstream input(" Surat Gujarat");
+		//std::streambuf* originalCin = std::cin.rdbuf(input.rdbuf());
+		eng.setAddress("Surat Gujarat");
+		//std::cin.rdbuf(originalCin);
 
 		eng.setProgramming_language("JAVA");
 
-		std::stringstream input1(" Jr Software Engineer");
-		std::streambuf* originalCin1 = std::cin.rdbuf(input.rdbuf());
-		eng.setSpecialization();
-		std::cin.rdbuf(originalCin);
+		//std::stringstream input1(" Jr Software Engineer");
+		//std::streambuf* originalCin1 = std::cin.rdbuf(input.rdbuf());
+		eng.setSpecialization("Jr Software Engineer");
+		//std::cin.rdbuf(originalCin);
 
 
 		eg3.setDepartmentId(5);

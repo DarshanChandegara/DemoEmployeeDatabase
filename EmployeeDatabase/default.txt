@@ -36,3 +36,16 @@
 29/3/2024 :: 18:20:5 [Info] [System] Database closed Successfully 
 29/3/2024 :: 18:33:48 [Info] [System] Database Open Successfully 
 29/3/2024 :: 18:33:55 [Info] [System] Database closed Successfully 
+29/3/2024 :: 22:33:57 [Info] [System] Database Open Successfully 
+29/3/2024 :: 22:34:26 [Info] [System] Department Deleted with Id:  11 
+29/3/2024 :: 22:34:34 [Info] [System] Department Deleted with Id:  5 
+29/3/2024 :: 22:34:39 [Info] [System] Database closed Successfully 
+30/3/2024 :: 0:1:4 [Info] [System] Database Open Successfully 
+30/3/2024 :: 0:2:3 [Info] [System] Department Updated with Id:  3 
+30/3/2024 :: 0:2:13 [Info] [System] Database closed Successfully 
+30/3/2024 :: 13:10:2 [Info] [System] Database Open Successfully 
+30/3/2024 :: 13:13:19 [Info] [System] Department Updated with Id:  3 
+30/3/2024 :: 13:13:31 [Info] [System] Database closed Successfully 
+30/3/2024 :: 13:17:17 [Info] [System] Database Open Successfully 
+30/3/2024 :: 13:18:36 [Info] [System] Department added for Id:  4 
+30/3/2024 :: 13:18:59 [Info] [System] Database closed Successfully 

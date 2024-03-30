@@ -1,5 +1,6 @@
 #pragma once
 #include "include/Model/Department.h"
+#include "include/controllers/departmentController.h"
 #include "gtest/gtest.h"
 
 class DepartmentFixture : public testing::Test {
@@ -9,38 +10,27 @@ class DepartmentFixture : public testing::Test {
 			// Uncomment for UpdateTest
 			//std::stringstream input(" BackEnd Team");
 			//std::streambuf* originalCin = std::cin.rdbuf(input.rdbuf());
-			//d3.setName();
+			//d2.setManagerId(5);
+			//d3.setName("BackEnd Team");
 			//std::cin.rdbuf(originalCin);
 
 			//std::stringstream input1(" Manage the backend part"); 
 			//std::streambuf* originalCin1 = std::cin.rdbuf(input1.rdbuf());
-			//d3.setDescription();
+			//d3.setDescription("Manage the backend part"); 
 			//std::cin.rdbuf(originalCin1);
-
-			//d3.setManagerId(2);
-
-
-			//Uncomment for DeleteTest
-			//std::stringstream input(" BackZEnd"); 
-			//std::streambuf* originalCin = std::cin.rdbuf(input.rdbuf()); 
-			//d3.setName();  
-			//std::cin.rdbuf(originalCin);
-
-			//std::stringstream input1(" WD");
-			//std::streambuf* originalCin1 = std::cin.rdbuf(input1.rdbuf());
-			//d4.setName();
-			//std::cin.rdbuf(originalCin1);
-
+			//d3.setId(5);
+			//d3.setManagerId(2);  
+			
 		}
 
 		void TearDown() {
 
 		}
 
-		Model::Department d1{1 , "Finance" , 1 , "Do the work related to money "};
+		Model::Department d1{1 , "Finance" , 2 , "Do the work related to money "};
 		Model::Department d2{3 , "Finance" , 5 , "Do the work related to money "};
-		Model::Department d3{3 , "Web Dev" , 1 , "Do the work related to Website Handling"};
-		Model::Department d4{4 , "HR" , 1 , "Do the work related to Human resource and management of employees"};
+		Model::Department d3{3 , "Web Dev" , 2 , "Do the work related to Website Handling"};
+		Model::Department d4{4 , "HR" , 2 , "Do the work related to Human resource and management of employees"};
 		Model::Department d5{5 , "HR" , 1 , "Do the work related to Human resource and management of employees"};
 		Model::Department d6 = d4;
 };
