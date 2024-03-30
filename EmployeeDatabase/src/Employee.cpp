@@ -1,8 +1,5 @@
 #include "../include/Model/Employee.h"
-
-std::optional<std::pair<std::string, std::string>> viewEmployeeController();
-std::optional<Model::Employee> updateEmployeeController();
-std::optional<Model::Employee> deleteEmployeeController();
+#include "../include/controllers/employeeController.h"
 
 bool Model::Employee::viewEmployee() {
 	try {
@@ -13,16 +10,16 @@ bool Model::Employee::viewEmployee() {
 			auto& [field, value] = tmp.value();
 			if (field == "Eid" || field == "manager_id") {
 
-				query += "select * from Department where " + field + " = " + value + " ;";
+				query += "select * from Employee where " + field + " = " + value + " ;";
 			}
 			else if (field == "all") {
-				query += "select * from Department ;";
+				query += "select * from Employee ;";
 			}
 			else if (field == "Dname") {
 				query += "SELECT Employee.* FROM Employee JOIN Department ON Employee.department_id = Department.id WHERE Dname = '" + value + "' ;";
 			}
 			else {
-				query += "select * from Department where " + field + " = '" + value + "' ;";
+				query += "select * from Employee where " + field + " = '" + value + "' ;";
 			}
 
 			DB::Database::getInstance().selectQuery(query.c_str());
@@ -83,46 +80,46 @@ bool Model::Employee::insertEmployee() {
 }
 
 bool Model::Employee::updateEmployee() {
-	try { 
-		auto tmp = updateEmployeeController(); 
-		//auto tmp = Model::Employee::getEmployee(std::to_string(id));  // For testing
-		if (tmp.has_value()) { 
+	try {
 
-			*this = tmp.value();
+		// Uncooment for testing
+		/*std::string select = "select * from Employee where Eid = " + std::to_string(Eid) + ";";
 
-			std::string query = " UPDATE Employee SET  firstname = '" + firstname + "', lastname = '" + lastname + "', dob = '" + dob + "', mobile = '" + mobile + "', email = '" + email + "', address = '" + address + "', gender = ";
-			if (gender == Gender::Male) {
-				query += "Male"; 
-			}
-			else if (gender == Gender::Female) { 
-				query += "Female"; 
-			}
-			else {
-				query += "Other"; 
-			} 
-			
-			query += ", doj = '" + doj + "' , manager_id = " + std::to_string(manager_id) + " , department_id = " + std::to_string(department_id) + " WHERE Eid = " + std::to_string(Eid) + ";";
-			//std::cout << query << "\n";
-			//waitMenu(); 
-			int rc = DB::Database::getInstance().executeQuery(query.c_str());
+		DB::Database::getInstance().selectQuery(select.c_str());
+		if (DB::Database::row == 0) {
+			std::cout << "\x1b[33m Employee is not in database \x1b[0m\n";
+			waitMenu();
+			return false;
+		}*/
 
-			if (rc == 19) {
-				std::cerr << "\x1b[33m You can not assigne value because entered manager or department is not in database OR entered employee is already in database \x1b[0m\n\n";
-				waitMenu();
-				return false;
-			}
-			else if (rc == 0) {
-				std::cout << "\x1b[32m Employee Updated successfully\x1b[0m \n\n";
-				waitMenu();
-				logging::Info("Employee Updated with Id: ", std::to_string(getId()));
-				return true;
-			}
+		std::string query = " UPDATE Employee SET  firstname = '" + firstname + "', lastname = '" + lastname + "', dob = '" + dob + "', mobile = '" + mobile + "', email = '" + email + "', address = '" + address + "', gender = ";
+		if (gender == Gender::Male) {
+			query += "'Male'";
+		}
+		else if (gender == Gender::Female) {
+			query += "'Female'";
 		}
 		else {
-			std::cerr << "\x1b[33m Updation Failed \x1b[0m\n\n";
+			query += "'Other'";
+		}
+
+		query += ", doj = '" + doj + "' , manager_id = " + std::to_string(manager_id) + " , department_id = " + std::to_string(department_id) + " WHERE Eid = " + std::to_string(Eid) + ";";
+		//std::cout << query << "\n";
+		//waitMenu(); 
+		int rc = DB::Database::getInstance().executeQuery(query.c_str());
+
+		if (rc == 19) {
+			std::cerr << "\x1b[33m You can not assigne value because entered manager or department is not in database OR entered employee is already in database \x1b[0m\n\n";
 			waitMenu();
 			return false;
 		}
+		else if (rc == 0) {
+			std::cout << "\x1b[32m Employee Updated successfully\x1b[0m \n\n";
+			waitMenu();
+			logging::Info("Employee Updated with Id: ", std::to_string(getId()));
+			return true;
+		}
+
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -130,46 +127,35 @@ bool Model::Employee::updateEmployee() {
 		waitMenu();
 		return false;
 	}
+	
 }
 
 bool Model::Employee::deleteEmployee() {
 	try {
+		std::string query = "delete from Employee where Eid = " + std::to_string(Eid) + ";";
 
-		auto tmp =  deleteEmployeeController();  
-		//auto tmp = Model::Employee::getEmployee(std::to_string(Eid));  for testing 
+		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 
-		if (tmp.has_value()) { 
-			*this = tmp.value(); 
-			std::string query = "delete from Department where id = " + std::to_string(Eid) + ";"; 
-
-			int rc = DB::Database::getInstance().executeQuery(query.c_str());
-
-			if (rc == 0) {
-				int change = sqlite3_changes(DB::Database::getInstance().db);
-				if (change == 0) {
-					std::cout << "\x1b[33m Selected Employee is not in database\x1b[0m\n";
-					waitMenu();
-					return false;
-				}
-				else {
-					std::cout << "\x1b[32m Employee Deleted successfully\x1b[0m \n\n";
-					waitMenu();
-					logging::Info("Employee Deleted with Id: ", std::to_string(getId()));
-					return true;
-				}
-			}
-			else if (rc == 19) {
-				std::cout << "\x1b[33m You can not Delete this Employee because there is employee which are managed by in this Employee \x1b[0m \n\n";
+		if (rc == 0) {
+			int change = sqlite3_changes(DB::Database::getInstance().db);
+			if (change == 0) {
+				std::cout << "\x1b[33m Selected Employee is not in database\x1b[0m\n";
 				waitMenu();
 				return false;
 			}
+			else {
+				std::cout << "\x1b[32m Employee Deleted successfully\x1b[0m \n\n";
+				waitMenu();
+				logging::Info("Employee Deleted with Id: ", std::to_string(getId()));
+				return true;
+			}
 		}
-		else {
-			std::cout << "\x1b[33m Deletion Failed!!! \x1b[0m\n";
+		else if (rc == 19) {
+			std::cout << "\x1b[33m You can not Delete this Employee because there is employee which are managed by in this Employee \x1b[0m \n\n";
 			waitMenu();
 			return false;
 		}
-		return false;
+
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -177,10 +163,6 @@ bool Model::Employee::deleteEmployee() {
 		waitMenu();
 		return false;
 	}
-}
-
-void Model::Employee::action() noexcept {
-
 }
 
 //bool Model::Employee::userInputEmployee() {

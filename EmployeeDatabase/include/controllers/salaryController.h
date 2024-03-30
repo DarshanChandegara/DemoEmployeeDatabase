@@ -2,7 +2,7 @@
 #include "../Model/Salary.h"
 #include<optional>
 
-std::optional<Model::Salary> userInputSalary() {
+inline std::optional<Model::Salary> userInputSalary() {
 	try {
 		Model::Salary s;
 		std::string msg = " Enter # to leave the field Empty: \n";

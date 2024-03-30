@@ -63,7 +63,6 @@ namespace Model {
         bool updateEmployee();
         //bool userInputEmployee();
         static std::optional<Employee> getEmployee(const std::string&);
-        void action() noexcept;
 
         Model::Salary s{};
     private:

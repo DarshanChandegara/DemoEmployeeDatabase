@@ -162,6 +162,7 @@
     <ClCompile Include="src\Table.cpp" />
     <ClInclude Include="include\controllers\departmentController.h" />
     <ClInclude Include="include\controllers\employeeController.h" />
+    <ClInclude Include="include\controllers\engineerController.h" />
     <ClInclude Include="include\controllers\salaryController.h" />
     <ClInclude Include="include\Helper.h" />
     <ClInclude Include="include\LOG\fileHelper.h" />

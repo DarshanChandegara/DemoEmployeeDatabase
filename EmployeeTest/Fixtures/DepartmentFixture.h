@@ -10,7 +10,6 @@ class DepartmentFixture : public testing::Test {
 			// Uncomment for UpdateTest
 			//std::stringstream input(" BackEnd Team");
 			//std::streambuf* originalCin = std::cin.rdbuf(input.rdbuf());
-			//d2.setManagerId(5);
 			//d3.setName("BackEnd Team");
 			//std::cin.rdbuf(originalCin);
 
@@ -18,8 +17,7 @@ class DepartmentFixture : public testing::Test {
 			//std::streambuf* originalCin1 = std::cin.rdbuf(input1.rdbuf());
 			//d3.setDescription("Manage the backend part"); 
 			//std::cin.rdbuf(originalCin1);
-			//d3.setId(5);
-			//d3.setManagerId(2);  
+			//d3.setManagerId(2);   
 			
 		}
 

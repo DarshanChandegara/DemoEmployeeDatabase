@@ -49,3 +49,23 @@
 30/3/2024 :: 13:17:17 [Info] [System] Database Open Successfully 
 30/3/2024 :: 13:18:36 [Info] [System] Department added for Id:  4 
 30/3/2024 :: 13:18:59 [Info] [System] Database closed Successfully 
+30/3/2024 :: 17:9:26 [Info] [System] Database Open Successfully 
+30/3/2024 :: 17:10:6 [Info] [System] Department added for Id:  5 
+30/3/2024 :: 17:10:50 [Info] [System] Database closed Successfully 
+30/3/2024 :: 17:13:23 [Info] [System] Database Open Successfully 
+30/3/2024 :: 17:13:40 [Info] [System] Department Updated with Id:  5 
+30/3/2024 :: 17:14:17 [Info] [System] Department Deleted with Id:  5 
+30/3/2024 :: 17:14:26 [Info] [System] Database closed Successfully 
+30/3/2024 :: 17:15:56 [Info] [System] Database Open Successfully 
+30/3/2024 :: 17:16:16 [Info] [System] Database closed Successfully 
+30/3/2024 :: 17:37:50 [Info] [System] Database Open Successfully 
+30/3/2024 :: 17:38:3 [Info] [System] Database closed Successfully 
+31/3/2024 :: 0:4:53 [Info] [System] Database Open Successfully 
+31/3/2024 :: 0:5:53 [Info] [System] Employee Updated with Id:  303 
+31/3/2024 :: 0:5:55 [Info] [System] Engineer updated for Id:  303 
+31/3/2024 :: 0:6:29 [Info] [System] Database closed Successfully 
+31/3/2024 :: 0:7:58 [Info] [System] Database Open Successfully 
+31/3/2024 :: 0:8:15 [Info] [System] Database closed Successfully 
+31/3/2024 :: 0:9:28 [Info] [System] Database Open Successfully 
+31/3/2024 :: 0:9:58 [Info] [System] Employee Deleted with Id:  302 
+31/3/2024 :: 0:10:8 [Info] [System] Database closed Successfully 

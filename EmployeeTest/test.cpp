@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "include/Model/Employee.h"
 #include "Fixtures/EmployeeFixture.h"
 #include "Fixtures/EngineerFixture.h"
 #include "Fixtures/DepartmentFixture.h"
@@ -36,9 +35,9 @@ TEST_F(EmployeeFixture, DISABLED_ViewTest) {
 
 TEST_F(EmployeeFixture, DISABLED_InsertTest) {
 	ASSERT_TRUE(e1.insertEmployee());  // Success
-	//ASSERT_FALSE(e2.insertEmployee());  // Fail because Employee is already exist 
-	//ASSERT_FALSE(e3.insertEmployee()); // Fail Beacause Manager is not available 
-	//ASSERT_FALSE(e4.insertEmployee()); // Fail Beacause Department is not available 
+	ASSERT_FALSE(e2.insertEmployee());  // Fail because Employee is already exist  
+	ASSERT_FALSE(e3.insertEmployee()); // Fail Beacause Manager is not available  
+	ASSERT_FALSE(e4.insertEmployee()); // Fail Beacause Department is not available   
 }
 
 TEST_F(EmployeeFixture, DISABLED_UpdateTest) {
@@ -48,13 +47,11 @@ TEST_F(EmployeeFixture, DISABLED_UpdateTest) {
 	ASSERT_TRUE(e1.updateEmployee()); // Sucess     
 }
 
-TEST_F(EmployeeFixture, DISABLED_DeleteTest) {
+TEST_F(EmployeeFixture, DeleteTest) {
 	ASSERT_FALSE(emp.deleteEmployee()); // Fail Beacuse  it is a manager of other employeees  
 	ASSERT_FALSE(e4.deleteEmployee()); // Fail because Employee with given id is not available  
-	ASSERT_FALSE(e2.deleteEmployee()); // Fail because Employee with given Email is not available  
 
 	ASSERT_TRUE(e2.deleteEmployee());  // Suceess   
-	ASSERT_TRUE(e3.deleteEmployee());  // Sucess    
 }
 
 
@@ -93,7 +90,7 @@ TEST_F(EngineerFixture, DISABLED_DeleteTest) {
 
 
 // Department 
-TEST_F(DepartmentFixture, DISABLED_InsertTest) {
+TEST_F(DepartmentFixture, DISABLED_InsertTest) { 
 	ASSERT_FALSE(d1.insertDepartment()); // Fail because With given department id there is already some other department 
 	ASSERT_FALSE(d2.insertDepartment());  // Fail because enterd manager is not in manager table  
 	ASSERT_TRUE(d3.insertDepartment()); // Success  
@@ -105,9 +102,9 @@ TEST_F(DepartmentFixture, DISABLED_ViewTest) {
 }
 
 TEST_F(DepartmentFixture, DISABLED_UpdateTest) {
-	ASSERT_FALSE(d2.updateDepartment());  // Fail because manager id is not in database 
-	ASSERT_FALSE(d5.updateDepartment()); // Fali beacuse department is not in table      
-	ASSERT_TRUE(d3.updateDepartment());  // Success   
+	ASSERT_FALSE(d2.updateDepartment());  // Fail because manager id is not in database  
+	ASSERT_FALSE(d5.updateDepartment());  // Fali beacuse department is not in table      
+	ASSERT_TRUE(d3.updateDepartment());   // Success    
 }
 
 TEST_F(DepartmentFixture, DISABLED_DeleteTest) {

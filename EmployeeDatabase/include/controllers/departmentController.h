@@ -4,7 +4,7 @@
 #include<optional>
 #include<utility>
 
-std::optional<Model::Department> userinputDepartment() { 
+inline std::optional<Model::Department> userinputDepartment() { 
 	try {
 		system("cls"); 
 		std::cout << "If you want to go back press 0 Otherwise press 1\n"; 
@@ -35,7 +35,7 @@ std::optional<Model::Department> userinputDepartment() {
 	}
 }
 
-std::optional<std::pair<std::string, std::string>> viewDepartmentController() {
+inline std::optional<std::pair<std::string, std::string>> viewDepartmentController() {
 	try {
 
 		std::pair<std::string, std::string> p;
@@ -108,20 +108,26 @@ std::optional<std::pair<std::string, std::string>> viewDepartmentController() {
 	}
 }
 
-std::optional<Model::Department> updateDepartmentController() {
+inline std::optional<Model::Department> updateDepartmentController() {
 	try {
 		system("cls");
 		Model::Department d; 
 		d.setId(std::stoi(input("Enter the Did to update Department : ", idRegex).value()));   
+		std::string select = "select * from Department where id = " + std::to_string(d.getId()) + ";";  
 
-		//std::string select = "select * from Department where id = " + std::to_string(d.getId()) + " ;"; 
-		//std::cout << select << "\n";
-		
+		DB::Database::getInstance().selectQuery(select.c_str()); 
 
-		auto tmp = Model::Department::getDepartment(std::to_string(d.getId())); 
-		//std::cout << tmp.value().getId() << "\n";
-		//waitMenu(); 
+		if (DB::Database::row == 0) {
+			std::cout << "\x1b[33m Department is not in database \x1b[0m\n";
+			waitMenu();
+			return std::nullopt;
+		}
+
+		auto tmp = Model::Department::getDepartment(std::to_string(d.getId()));  
+
 		if (tmp.has_value()) { 
+
+			system("cls");
 			d = tmp.value();  
 			bool check = true; 
 			int i; 
@@ -176,7 +182,7 @@ std::optional<Model::Department> updateDepartmentController() {
 	}
 }
 
-std::optional<Model::Department> deleteDepartmentController() { 
+inline std::optional<Model::Department> deleteDepartmentController() { 
 	try {
 		system("cls"); 
 

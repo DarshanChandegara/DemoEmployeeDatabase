@@ -2,6 +2,8 @@
 #include "../include/Model/Engineer.h" 
 #include "../include/Model/Manager.h"
 #include "../include/controllers/departmentController.h"
+#include "../include/controllers/engineerController.h"
+#include<optional>
 using namespace std;
 
 void action(int j) noexcept {
@@ -17,8 +19,8 @@ void action(int j) noexcept {
 
 		int i;
 		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-5]" }).value_or("5"));
-		Model::Engineer e;
-		Model::Manager m;
+		Model::Engineer e; 
+		Model::Manager m; 
 		Model::Department d;
 		switch (j) {
 		case 1:
@@ -28,16 +30,43 @@ void action(int j) noexcept {
 				break;
 
 			case 2:
-				e.insertEngineer();
+			{
+				auto e1 = userInputEngineer();
+				if (e1.has_value()) {
+					e1.value().insertEngineer();
+				}
+				else {
+					std::cerr << "\x1b[33m Insertion Failed \x1b[0m\n\n"; 
+					waitMenu(); 
+				}
 				break;
+			}
 
 			case 3:
-				e.updateEngineer();
+			{
+				auto e1 = updateEngineerController(); 
+				if (e1.has_value()) { 
+					e1.value().updateEngineer();  
+				}
+				else {
+					std::cerr << "\x1b[33m Updation Failed \x1b[0m\n\n"; 
+					waitMenu(); 
+				}
 				break;
+			}
 
 			case 4:
-				e.deleteEngineer();
+			{
+				auto e1 = deleteEmployeeController(); 
+				if (e1.has_value()) { 
+					e1.value().deleteEmployee(); 
+				}
+				else {
+					std::cerr << "\x1b[33m Insertion Failed \x1b[0m\n\n"; 
+					waitMenu(); 
+				}
 				break;
+			}
 
 			case 5:
 				check = false;
@@ -78,23 +107,38 @@ void action(int j) noexcept {
 			case 2:
 			{
 				auto d1 = userinputDepartment();
-				if (d1.has_value())
+				if (d1.has_value())  
 					d1.value().insertDepartment();
 				else {
-					std::cout << "\x1b[33mInsertion Failed!!!!\x1b[0m\n";
-					waitMenu();
-				}
-
+					std::cerr << "\x1b[33m Insertion Failed \x1b[0m\n\n";
+					waitMenu(); 
+				}  
 				break;
 			}
 
 			case 3:
-				d.updateDepartment();
+			{
+				auto d1 = updateDepartmentController();
+				if (d1.has_value()) 
+					d1.value().updateDepartment();
+				else {
+					std::cerr << "\x1b[33m Updation Failed \x1b[0m\n\n"; 
+					waitMenu(); 
+				}
 				break;
+			}
 
 			case 4:
-				d.deleteDepartment();
+			{
+				auto d1 = deleteDepartmentController();
+				if (d1.has_value())
+					d1.value().deleteDepartment();
+				else {
+					std::cerr << "\x1b[33m Deletion Failed \x1b[0m\n\n"; 
+					waitMenu(); 
+				}
 				break;
+			}
 
 			case 5:
 				check = false;

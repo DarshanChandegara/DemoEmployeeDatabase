@@ -45,7 +45,6 @@ namespace Model {
 		bool insertDepartment();
 		bool deleteDepartment();
 		bool updateDepartment();
-		void action() noexcept;
 
 	private:
 
