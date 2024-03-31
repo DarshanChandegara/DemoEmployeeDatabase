@@ -69,3 +69,54 @@
 31/3/2024 :: 0:9:28 [Info] [System] Database Open Successfully 
 31/3/2024 :: 0:9:58 [Info] [System] Employee Deleted with Id:  302 
 31/3/2024 :: 0:10:8 [Info] [System] Database closed Successfully 
+31/3/2024 :: 13:27:27 [Info] [System] Database Open Successfully 
+31/3/2024 :: 13:27:35 [Info] [System] Database closed Successfully 
+31/3/2024 :: 14:2:43 [Info] [System] Database Open Successfully 
+31/3/2024 :: 14:7:38 [Info] [System] Employee added for Id:  502 
+31/3/2024 :: 14:7:40 [Info] [System] Manager Added for Id:  502 
+31/3/2024 :: 14:9:36 [Info] [System] Employee Updated with Id:  502 
+31/3/2024 :: 14:9:36 [Info] [System] Manager updated for Id:  502 
+31/3/2024 :: 14:10:32 [Info] [System] Employee Deleted with Id:  502 
+31/3/2024 :: 14:10:53 [Info] [System] Database closed Successfully 
+31/3/2024 :: 14:11:32 [Info] [System] Database Open Successfully 
+31/3/2024 :: 14:11:42 [Info] [System] Database closed Successfully 
+31/3/2024 :: 14:50:17 [Info] [System] Database Open Successfully 
+31/3/2024 :: 14:50:58 [Info] [System] Salary updated for Id:  301 
+31/3/2024 :: 15:14:2 [Info] [System] Database Open Successfully 
+31/3/2024 :: 15:15:34 [Info] [System] Salary updated for Id:  0 
+31/3/2024 :: 15:16:8 [Info] [System] Database closed Successfully 
+31/3/2024 :: 15:19:10 [Info] [System] Database Open Successfully 
+31/3/2024 :: 15:19:36 [Info] [System] Employee Updated with Id:  501 
+31/3/2024 :: 15:19:37 [Info] [System] Manager updated for Id:  501 
+31/3/2024 :: 15:19:44 [Info] [System] Database closed Successfully 
+31/3/2024 :: 15:39:42 [Info] [System] Database Open Successfully 
+31/3/2024 :: 15:39:49 [Info] [System] Salary updated for Id:  501 
+31/3/2024 :: 15:40:4 [Info] [System] Salary updated for Id:  501 
+31/3/2024 :: 15:48:21 [Info] [System] Database Open Successfully 
+31/3/2024 :: 15:48:40 [Info] [System] Database closed Successfully 
+31/3/2024 :: 15:49:48 [Info] [System] Database Open Successfully 
+31/3/2024 :: 15:49:52 [Info] [System] Table Employee backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table Engineer backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table Manager backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table Salary backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table Department backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table demo backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table darshan backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table deep backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table darsh backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table this backup successfull!!!! 
+31/3/2024 :: 15:49:52 [Info] [System] Table dscvs backup successfull!!!! 
+31/3/2024 :: 15:49:53 [Info] [System] Table BackUp successfull!!!!!! 
+31/3/2024 :: 15:50:23 [Info] [System] Database Open Successfully 
+31/3/2024 :: 15:50:25 [Info] [System] Table Employee backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table Engineer backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table Manager backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table Salary backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table Department backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table demo backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table darshan backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table deep backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table darsh backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table this backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table dscvs backup successfull!!!! 
+31/3/2024 :: 15:50:25 [Info] [System] Table BackUp successfull!!!!!! 

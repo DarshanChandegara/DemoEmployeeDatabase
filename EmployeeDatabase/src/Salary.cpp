@@ -1,25 +1,5 @@
 #include "../include/Model/Salary.h"
-
-//bool Model::Salary::userInputSalary(){
-//
-//	try {
-//		std::string msg = " Enter # to leave the field Empty: \n"; 
-//
-//		if (auto tmp = input("Enter Base Salary OR " + msg, salaryRegex, true); tmp.has_value()) setBaseSalary(std::stof(tmp.value()));
-//		else return false;
-//
-//		if (auto tmp = input("Enter Bonus OR " + msg, salaryRegex, true); tmp.has_value()) setBonus(std::stof(tmp.value())); 
-//		else return false;
-//
-//		setAmount(base_salary + bonus); 
-//		return true;
-//	}
-//	catch (std::exception& e) {
-//		std::cout << e.what() << std::endl;
-//		waitMenu(); 
-//		return false;
-//	}
-//}
+#include "../include/controllers/salaryController.h"
 
 double Model::Salary::increment(double percentage, int id) {
 	try {
@@ -28,19 +8,15 @@ double Model::Salary::increment(double percentage, int id) {
 		int rc = sqlite3_prepare_v2(DB::Database::getInstance().db, query.c_str(), -1, &DB::Database::getInstance().stmt, nullptr);
 		rc = sqlite3_step(DB::Database::getInstance().stmt);
 		if (rc == SQLITE_ROW) {
-			// Get the value of the 'amount' column
 			val = sqlite3_column_double(DB::Database::getInstance().stmt, 0);
-			//std::cout << "Amount: " << val << std::endl;
 		}
 		else {
-			//std::cerr << "No rows returned" << std::endl;
 		}
 
 		val = (val + ((val * percentage) / 100));
 		setBaseSalary(val);
 		setAmount(base_salary + bonus);
 		return amount;
-		//std::cout << amount << "\n";
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -51,19 +27,32 @@ double Model::Salary::increment(double percentage, int id) {
 
 bool Model::Salary::viewSalary() {
 	try {
+
 		system("cls");
-		std::string query = "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid where Sid =  ";
-		std::string tmp;
-		std::cout << "Enter Eid to view salary :";
-		std::cin >> tmp;
-		query += tmp + " ;";
-		DB::Database::getInstance().selectQuery(query.c_str());
-		if (DB::Database::row == 0) {
+
+		std::string query;
+		auto tmp = viewSalaryController();
+
+		if (tmp.has_value()) {
+			auto& [field, value] = tmp.value();
+			if (field == "id") {
+
+				query += "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid where Sid = " + value + " ;";
+			}
+			else if (field == "all") {
+				query += "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid ;";
+			}
+
+			DB::Database::getInstance().selectQuery(query.c_str());
+			if (DB::Database::row == 0) {
+				return false;
+			}
 			waitMenu();
+			return true;
+		}
+		else {
 			return false;
 		}
-		waitMenu();
-		return true;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -90,93 +79,31 @@ bool Model::Salary::updateSalary() {
 	try {
 		system("cls");
 
-		setId(std::stoi(input( "Enter the Eid to update Salary : ",idRegex).value()));
+		// Uncomment for testing 
+		/*std::string select = "select * from Salary where Sid = " + std::to_string(getId()) + ";";
 
-		std::string select = "select * from Salary where Sid = " + std::to_string(getId()) + " ;";
 		DB::Database::getInstance().selectQuery(select.c_str());
+
 		if (DB::Database::row == 0) {
-			std::cout << "Entered Employee is not in database\n\n";
-			std::cout << "Press 0 to continue\n";
-			int i;
-			std::cin >> i;
+			std::cout << "\x1b[33m Employee is not in database \x1b[0m\n";
+			waitMenu();
 			return false;
+		}*/
+
+		setAmount(base_salary + bonus);
+		std::string query = "update Salary set amount = " + std::to_string(amount) + "  , base_salary = " + std::to_string(base_salary) + " , bonus = " + std::to_string(bonus) + " where Sid = " + std::to_string(Sid) + "; ";
+		//std::cout << query << "\n";   
+
+		int rc = DB::Database::getInstance().executeQuery(query.c_str()); 
+		if (rc == 0) {
+			std::cout << "\x1b[32mSalary updated successfully\x1b[0m\n\n";
+			waitMenu();
+			logging::Info("Salary updated for Id: ", std::to_string(getId()));
+
+			return true;
 		}
-		else {
-			std::string query1 = "select base_salary from Salary where Sid = " + std::to_string(Sid) + " ;";
-			int rc = sqlite3_prepare_v2(DB::Database::getInstance().db, query1.c_str(), -1, &DB::Database::getInstance().stmt, nullptr);
-			rc = sqlite3_step(DB::Database::getInstance().stmt);
-			base_salary = sqlite3_column_double(DB::Database::getInstance().stmt, 0);
+		return false;
 
-			query1 = "select bonus from Salary where Sid = " + std::to_string(Sid) + " ;";
-			rc = sqlite3_prepare_v2(DB::Database::getInstance().db, query1.c_str(), -1, &DB::Database::getInstance().stmt, nullptr);
-			rc = sqlite3_step(DB::Database::getInstance().stmt);
-			bonus = sqlite3_column_double(DB::Database::getInstance().stmt, 0);
-
-			bool check = true;
-			int i;
-			while (check) {
-				system("cls");
-				std::cout << "Select the field you want to update \n";
-				std::cout << "0. Go Back\n";
-				std::cout << "1. Base Salary\n";
-				std::cout << "2. Bonus\n";
-				std::cout << "3. Increment\n";
-				std::cout << "4. ToUpdate\n";
-
-				std::string value;
-				i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }).value_or("0"));
-				switch (i) {
-				case 0:
-					return true;
-
-				case 1:
-					if (auto tmp = input("Enter Base Salary: ", salaryRegex, true); tmp.has_value()) setBaseSalary(std::stof(tmp.value()));
-					else {
-						std::cout << "\x1b[33m Updation Fail!!! \x1b[0m\n";
-						waitMenu(); 
-						return false;
-					}
-					break;
-
-				case 2:
-					if (auto tmp = input("Enter Bonus: ", salaryRegex, true); tmp.has_value()) setBonus(std::stof(tmp.value())); 
-					else {
-						std::cout << "\x1b[33m Updation Fail!!! \x1b[0m\n"; 
-						waitMenu(); 
-						return false;
-					}
-					break;
-
-				case 3:
-					if (auto tmp = input("Enter Precentage By which you want to : ", salaryRegex, true); tmp.has_value()) increment(std::stof(tmp.value()), getId()); 
-					else {
-						std::cout << "\x1b[33m Updation Fail!!! \x1b[0m\n";  
-						waitMenu();  
-						return false;
-					}
-					
-					break;
-
-				case 4:
-					check = false;
-					break;
-				}
-			}
-
-			setAmount(base_salary + bonus);
-			std::string query = "update Salary set amount = " + std::to_string(amount) + "  , base_salary = " + std::to_string(base_salary) + " , bonus = " + std::to_string(bonus) + " where Sid = " + std::to_string(Sid) + "; ";
-			//std::cout << query << "\n";  
-
-			rc = DB::Database::getInstance().executeQuery(query.c_str());
-			if (rc == 0) {
-				std::cout << "\x1b[32mSalary updated successfully\x1b[0m\n\n";
-				waitMenu();
-				logging::Info("Salary updated for Id: ", std::to_string(getId()));
-
-				return true;
-			}
-			return false;
-		}
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -190,33 +117,29 @@ bool Model::Salary::deleteSalary() {
 	return true;
 }
 
-void Model::Salary::action() noexcept {
-	auto check{ true };
-	while (check) {
-		system("cls");
-		std::cout << "Select The Operation You Want The Perform\n";
-		std::cout << "1. View\n";
-		std::cout << "2. Update\n";
-		std::cout << "3. Go to Main Menu\n\n";
+std::optional<Model::Salary> Model::Salary::getSalary(const std::string& id) {
 
-		int i;
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-3]" }).value_or("3")); 
-		switch (i) {
-		case 1:
-			viewSalary();
-			break;
+	Salary s;
+	auto callback = [](void* data, int argc, char** argv, char** azColName) {
 
-		case 2:
-			updateSalary();
-			break;
+		Salary* s1 = static_cast<Salary*>(data);
+		s1->setId(argv[0] ? std::stoi(argv[0]) : -1);
+		s1->setAmount(argv[1] ? std::stof(argv[1]) : -1);
+		s1->setBaseSalary(argv[2] ? std::stof(argv[2]) : -1);
+		s1->setBonus(argv[3] ? std::stof(argv[3]) : -1);
 
-		case 3:
-			check = false;
-			break;
+		return 0;
+		};
 
-		default:
-			std::cout << "Enter Valid Choice\n";
+	std::string selectQuery = "SELECT * FROM Salary WHERE Sid = " + id + ";";
 
-		}
+	try {
+		sqlite3_exec(DB::Database::getInstance().db, selectQuery.c_str(), callback, &s, 0);
 	}
+	catch (...) {
+		return std::nullopt;
+	}
+
+	return s;
+
 }

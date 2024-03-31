@@ -1,28 +1,6 @@
 #include "../include/Model/Engineer.h"
 #include "../include/controllers/engineerController.h"
 
-//bool Model::Engineer::userInputEngineer() {
-//	try {
-//		std::string msg = " Enter # to leave the field Empty: \n";
-//		system("cls");
-//
-//		//if (!userInputEmployee()) return false;
-//
-//		if (auto tmp = input("Enter Email OR " + msg, allRegex); tmp.has_value()) setProgramming_language(tmp.value());
-//		else return false;
-//
-//		if (auto tmp = input("Enter Specialization OR " + msg, allRegex); tmp.has_value()) setSpecialization(tmp.value());
-//		else return false;
-//
-//		return true;
-//	}
-//	catch (std::exception& e) {
-//		//std::cout << e.what() << std::endl;
-//		//waitMenu();
-//		return false;
-//	}
-//}
-
 bool Model::Engineer::viewEngineer() {
 	try {
 		system("cls");

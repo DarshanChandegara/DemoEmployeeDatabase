@@ -9,6 +9,7 @@
 using namespace utility;
 
 void menu();
+void tableAction();
 
 int main() {
 	logging::default_logger()->setFileFlag(true);   
@@ -54,7 +55,7 @@ int main() {
 			break;
 
 		case 5:
-			t.action();
+			tableAction();
 			break;
 		
 		case 6:

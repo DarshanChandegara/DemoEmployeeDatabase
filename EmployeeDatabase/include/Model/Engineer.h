@@ -29,7 +29,6 @@ namespace Model {
         bool insertEngineer();
         bool deleteEngineer();
         bool updateEngineer();
-        //bool userInputEngineer();
         static std::optional<Engineer> getEngineer(const std::string&);
 
     private:

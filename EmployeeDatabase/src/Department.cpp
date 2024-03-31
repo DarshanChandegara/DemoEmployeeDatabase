@@ -4,8 +4,10 @@
 bool Model::Department::viewDepartment() {
 	try {
 		system("cls");
+
 		std::string query;
 		auto tmp = viewDepartmentController();
+
 		if (tmp.has_value()) {
 			auto& [field, value] = tmp.value();
 			if (field == "id" || field == "manager_id") {

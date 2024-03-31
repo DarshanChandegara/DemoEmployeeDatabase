@@ -163,6 +163,7 @@
     <ClInclude Include="include\controllers\departmentController.h" />
     <ClInclude Include="include\controllers\employeeController.h" />
     <ClInclude Include="include\controllers\engineerController.h" />
+    <ClInclude Include="include\controllers\managerController.h" />
     <ClInclude Include="include\controllers\salaryController.h" />
     <ClInclude Include="include\Helper.h" />
     <ClInclude Include="include\LOG\fileHelper.h" />
@@ -194,13 +195,6 @@
     <ClInclude Include="sqlite\sqlite3ext.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="BackUp\darshan.csv" />
-    <None Include="BackUp\demo.csv" />
-    <None Include="BackUp\Department.csv" />
-    <None Include="BackUp\Employee.csv" />
-    <None Include="BackUp\Engineer.csv" />
-    <None Include="BackUp\Manager.csv" />
-    <None Include="BackUp\Salary.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

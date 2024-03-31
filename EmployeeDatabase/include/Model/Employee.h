@@ -61,7 +61,6 @@ namespace Model {
         bool insertEmployee();
         bool deleteEmployee();
         bool updateEmployee();
-        //bool userInputEmployee();
         static std::optional<Employee> getEmployee(const std::string&);
 
         Model::Salary s{};

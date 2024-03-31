@@ -31,12 +31,11 @@ namespace Model {
         void setBonus(const double& figure) { bonus = figure; }
 
         bool viewSalary();
-        //bool userInputSalary();
         bool insertSalary(int id) const;
         double increment(double, int);
         bool deleteSalary();
         bool updateSalary();
-        void action() noexcept;
+        static std::optional<Model::Salary> getSalary(const std::string&);
 
     private:
 

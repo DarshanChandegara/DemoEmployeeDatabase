@@ -165,67 +165,6 @@ bool Model::Employee::deleteEmployee() {
 	}
 }
 
-//bool Model::Employee::userInputEmployee() {
-//	try {
-//
-//		std::string msg = " Enter # to leave the field Empty: \n";
-//
-//		if (auto tmp = input("Enter Eid: ", idRegex); tmp.has_value()) setId(std::stoi(tmp.value())); 
-//		else return false;
-//
-//		if (auto tmp = input("Enter FirstName OR " + msg, alphaRegex); tmp.has_value()) setFirstname(tmp.value());
-//		else return false;
-//
-//		if (auto tmp = input("Enter LastName OR " + msg, alphaRegex); tmp.has_value()) setLastname(tmp.value()); 
-//		else return false;
-//
-//		if (auto tmp = input("Enter DOB (dd-mm-yyyy) OR " + msg, dateRegex); tmp.has_value()) setDob(tmp.value());
-//		else return false;
-//
-//		if (auto tmp = input("Enter Mobile OR " + msg, mobileRegex); tmp.has_value()) setMobile(tmp.value());
-//		else return false;
-//
-//		if (auto tmp = input("Enter Email OR " + msg, emailRegex); tmp.has_value()) setEmail(tmp.value());
-//		else return false;
-//
-//		if (auto tmp = input("Enter Email OR " + msg, allRegex); tmp.has_value()) setAddress(tmp.value());  
-//		else return false;
-//
-//		auto gender = input("Enter Gender(Male / Female / Other): ", genderRegex); 
-//		if (gender.has_value()) {
-//			if (gender.value() == "Male") {
-//				setGender(Gender::Male); 
-//			}
-//			else if (gender.value() == "Female") { 
-//				setGender(Gender::Female);
-//			}
-//			else {
-//				setGender(Gender::Other); 
-//			}
-//		}
-//		else {
-//			return false;
-//		}
-//		
-//		if (auto tmp = input("Enter DOJ(dd-mm-yyyy) OR " + msg, dateRegex); tmp.has_value()) setDoj(tmp.value()); 
-//		else return false;
-//
-//		if (auto tmp = input("Enter Manager Id: ", idRegex); tmp.has_value()) setManagerId(stoi(tmp.value())); 
-//		else return false;
-//		
-//		if (auto tmp = input("Enter Department Id: ", idRegex); tmp.has_value()) setDepartmentId(stoi(tmp.value()));
-//		else return false;
-//
-//		return s.userInputSalary();
-//		
-//	}
-//	catch (std::exception& e) {
-//		std::cout << e.what() << std::endl; 
-//		waitMenu(); 
-//		return false;
-//	}
-//}ss
-
 std::optional<Model::Employee> Model::Employee::getEmployee(const std::string& id) {
 
 	Employee e;
