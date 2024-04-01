@@ -318,6 +318,8 @@ inline std::optional<Model::Employee> updateEmployeeController() {
 		}
 	}
 	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
 		return std::nullopt;
 	}
 }
@@ -355,6 +357,8 @@ inline std::optional<Model::Employee> deleteEmployeeController() {
 		return d;
 	}
 	catch (std::exception e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
 		return std::nullopt;
 	}
 }

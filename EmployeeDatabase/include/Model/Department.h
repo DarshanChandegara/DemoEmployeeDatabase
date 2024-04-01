@@ -41,10 +41,10 @@ namespace Model {
 		}
 
 		static std::optional<Department> getDepartment(const std::string& id);
-		bool viewDepartment();
-		bool insertDepartment();
-		bool deleteDepartment();
-		bool updateDepartment();
+		bool viewDepartment() const;
+		bool insertDepartment() const;
+		bool deleteDepartment() const;
+		bool updateDepartment() const;
 
 	private:
 

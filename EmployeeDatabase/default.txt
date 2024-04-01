@@ -120,3 +120,24 @@
 31/3/2024 :: 15:50:25 [Info] [System] Table this backup successfull!!!! 
 31/3/2024 :: 15:50:25 [Info] [System] Table dscvs backup successfull!!!! 
 31/3/2024 :: 15:50:25 [Info] [System] Table BackUp successfull!!!!!! 
+31/3/2024 :: 21:14:31 [Info] [System] Database Open Successfully 
+31/3/2024 :: 21:14:49 [Info] [System] demo: Record Inserted successfully!!!! 
+31/3/2024 :: 21:15:6 [Info] [System] demo: Record updated successfully with id 101 
+31/3/2024 :: 21:15:23 [Info] [System] demo: Record updated successfully with id 101 
+31/3/2024 :: 21:15:29 [Info] [System] demo: Record deleted successfully with id 101 
+31/3/2024 :: 21:15:41 [Info] [System] Table Employee backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table Engineer backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table Manager backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table Salary backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table Department backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table demo backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table deep backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table darsh backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table this backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table dscvs backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table never backup successfull!!!! 
+31/3/2024 :: 21:15:41 [Info] [System] Table BackUp successfull!!!!!! 
+1/4/2024 :: 9:49:33 [Info] [System] Database Open Successfully 
+1/4/2024 :: 9:50:13 [Info] [System] Employee Updated with Id:  301 
+1/4/2024 :: 9:50:14 [Info] [System] Engineer updated for Id:  301 
+1/4/2024 :: 9:50:16 [Info] [System] Database closed Successfully 

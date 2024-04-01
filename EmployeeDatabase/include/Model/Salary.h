@@ -30,11 +30,11 @@ namespace Model {
         void setBaseSalary(const double& bSalary) { base_salary = bSalary; }
         void setBonus(const double& figure) { bonus = figure; }
 
-        bool viewSalary();
+        bool viewSalary() const ;
         bool insertSalary(int id) const;
         double increment(double, int);
-        bool deleteSalary();
-        bool updateSalary();
+        bool deleteSalary() const ;
+        bool updateSalary() const ;
         static std::optional<Model::Salary> getSalary(const std::string&);
 
     private:

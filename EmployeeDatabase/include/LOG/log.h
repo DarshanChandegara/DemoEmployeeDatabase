@@ -53,7 +53,7 @@ namespace logging {
 		mutable int bufferCount{ 0 };
 
 		~Log() {
-			if (isDumpOnFile) {
+			if (isDumpOnFile && bufferCount < 5) {
 				flush(buffer);
 				buffer = "";
 				bufferCount = 0;

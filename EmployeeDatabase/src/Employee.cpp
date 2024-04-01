@@ -1,7 +1,7 @@
 #include "../include/Model/Employee.h"
 #include "../include/controllers/employeeController.h"
 
-bool Model::Employee::viewEmployee() {
+bool Model::Employee::viewEmployee() const {
 	try {
 		system("cls");
 		std::string query;
@@ -42,7 +42,7 @@ bool Model::Employee::viewEmployee() {
 
 }
 
-bool Model::Employee::insertEmployee() {
+bool Model::Employee::insertEmployee() const {
 	try {
 
 		std::string query = "INSERT INTO Employee "
@@ -79,18 +79,18 @@ bool Model::Employee::insertEmployee() {
 	}
 }
 
-bool Model::Employee::updateEmployee() {
+bool Model::Employee::updateEmployee() const {
 	try {
 
-		// Uncooment for testing
-		/*std::string select = "select * from Employee where Eid = " + std::to_string(Eid) + ";";
+		//  for testing
+		std::string select = "select * from Employee where Eid = " + std::to_string(Eid) + ";";
 
 		DB::Database::getInstance().selectQuery(select.c_str());
 		if (DB::Database::row == 0) {
 			std::cout << "\x1b[33m Employee is not in database \x1b[0m\n";
 			waitMenu();
 			return false;
-		}*/
+		}
 
 		std::string query = " UPDATE Employee SET  firstname = '" + firstname + "', lastname = '" + lastname + "', dob = '" + dob + "', mobile = '" + mobile + "', email = '" + email + "', address = '" + address + "', gender = ";
 		if (gender == Gender::Male) {
@@ -119,7 +119,7 @@ bool Model::Employee::updateEmployee() {
 			logging::Info("Employee Updated with Id: ", std::to_string(getId()));
 			return true;
 		}
-
+		return false;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -130,7 +130,7 @@ bool Model::Employee::updateEmployee() {
 	
 }
 
-bool Model::Employee::deleteEmployee() {
+bool Model::Employee::deleteEmployee() const {
 	try {
 		std::string query = "delete from Employee where Eid = " + std::to_string(Eid) + ";";
 
@@ -155,7 +155,7 @@ bool Model::Employee::deleteEmployee() {
 			waitMenu();
 			return false;
 		}
-
+		return false;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;

@@ -25,7 +25,7 @@ double Model::Salary::increment(double percentage, int id) {
 	}
 }
 
-bool Model::Salary::viewSalary() {
+bool Model::Salary::viewSalary() const {
 	try {
 
 		system("cls");
@@ -75,12 +75,12 @@ bool Model::Salary::insertSalary(int id) const {
 	}
 }
 
-bool Model::Salary::updateSalary() {
+bool Model::Salary::updateSalary() const {
 	try {
 		system("cls");
 
-		// Uncomment for testing 
-		/*std::string select = "select * from Salary where Sid = " + std::to_string(getId()) + ";";
+		//  for testing 
+		std::string select = "select * from Salary where Sid = " + std::to_string(getId()) + ";";
 
 		DB::Database::getInstance().selectQuery(select.c_str());
 
@@ -88,9 +88,8 @@ bool Model::Salary::updateSalary() {
 			std::cout << "\x1b[33m Employee is not in database \x1b[0m\n";
 			waitMenu();
 			return false;
-		}*/
+		}
 
-		setAmount(base_salary + bonus);
 		std::string query = "update Salary set amount = " + std::to_string(amount) + "  , base_salary = " + std::to_string(base_salary) + " , bonus = " + std::to_string(bonus) + " where Sid = " + std::to_string(Sid) + "; ";
 		//std::cout << query << "\n";   
 
@@ -113,7 +112,7 @@ bool Model::Salary::updateSalary() {
 	}
 }
 
-bool Model::Salary::deleteSalary() {
+bool Model::Salary::deleteSalary() const {
 	return true;
 }
 

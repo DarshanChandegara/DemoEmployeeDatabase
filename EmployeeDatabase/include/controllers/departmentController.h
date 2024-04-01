@@ -177,7 +177,9 @@ inline std::optional<Model::Department> updateDepartmentController() {
 			return std::nullopt; 
 		}
 	}
-	catch (const std::exception& e) { 
+	catch (std::exception e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
 		return std::nullopt; 
 	}
 }
@@ -214,6 +216,8 @@ inline std::optional<Model::Department> deleteDepartmentController() {
 		return d;
 	}
 	catch(std::exception e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
 		return std::nullopt;
 	}
 }

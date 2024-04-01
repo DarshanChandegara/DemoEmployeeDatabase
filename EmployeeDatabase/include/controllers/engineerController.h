@@ -269,6 +269,8 @@ inline std::optional<Model::Engineer> updateEngineerController() {
 		}
 	}
 	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
 		return std::nullopt;
 	}
 }

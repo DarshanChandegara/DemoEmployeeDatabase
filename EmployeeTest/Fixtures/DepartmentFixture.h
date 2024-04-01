@@ -7,17 +7,9 @@ class DepartmentFixture : public testing::Test {
 	protected:
 
 		void SetUp() {
-			// Uncomment for UpdateTest
-			//std::stringstream input(" BackEnd Team");
-			//std::streambuf* originalCin = std::cin.rdbuf(input.rdbuf());
-			//d3.setName("BackEnd Team");
-			//std::cin.rdbuf(originalCin);
-
-			//std::stringstream input1(" Manage the backend part"); 
-			//std::streambuf* originalCin1 = std::cin.rdbuf(input1.rdbuf());
-			//d3.setDescription("Manage the backend part"); 
-			//std::cin.rdbuf(originalCin1);
-			//d3.setManagerId(2);   
+			d2.setManagerId(10);
+				
+			d3.setName("For testing");
 			
 		}
 

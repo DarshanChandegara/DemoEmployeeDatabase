@@ -25,10 +25,10 @@ namespace Model {
         void setManagementExperience(const int& yrs) { management_experience = yrs; }
         void setProjectTile(const std::string_view& title) { project_title = title; }
 
-        bool viewManager();
-        bool insertManager();
-        bool deleteManager();
-        bool updateManager();
+        bool viewManager() const;
+        bool insertManager() const;
+        bool deleteManager() const;
+        bool updateManager() const;
         static std::optional<Model::Manager> getManager(const std::string&);
 
     private:

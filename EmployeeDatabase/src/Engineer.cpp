@@ -1,7 +1,7 @@
 #include "../include/Model/Engineer.h"
 #include "../include/controllers/engineerController.h"
 
-bool Model::Engineer::viewEngineer() {
+bool Model::Engineer::viewEngineer() const {
 	try {
 		system("cls");
 		std::string query;
@@ -42,7 +42,7 @@ bool Model::Engineer::viewEngineer() {
 	}
 }
 
-bool Model::Engineer::insertEngineer() {
+bool Model::Engineer::insertEngineer() const {
 	try {
 
 		if (auto ch = insertEmployee(); ch) {
@@ -76,7 +76,7 @@ bool Model::Engineer::insertEngineer() {
 	return false;
 }
 
-bool Model::Engineer::updateEngineer() {
+bool Model::Engineer::updateEngineer() const {
 	try {
 		if (auto ch = updateEmployee(); ch) {
 
@@ -112,7 +112,7 @@ bool Model::Engineer::updateEngineer() {
 	return false;
 }
 
-bool Model::Engineer::deleteEngineer() {
+bool Model::Engineer::deleteEngineer() const {
 	try {
 		system("cls");
 		return deleteEmployee();

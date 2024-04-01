@@ -95,6 +95,7 @@ inline std::optional<Model::Salary> updateSalaryController() {
 					break;
 				}
 			}
+			e.setAmount(e.getBaseSalary() + e.getBonus());
 			return e;
 		}
 		else {
@@ -103,6 +104,8 @@ inline std::optional<Model::Salary> updateSalaryController() {
 		}
 	}
 	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
 		return std::nullopt;
 	}
 } 

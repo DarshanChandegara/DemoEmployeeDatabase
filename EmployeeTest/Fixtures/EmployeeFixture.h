@@ -17,30 +17,19 @@ protected:
 		emp.setGender(Gender::Male);
 		emp.setDoj("01-01-2024");
 		emp.setManagerId(1);
-		emp.setDepartmentId(1);
+		emp.setDepartmentId(1);	
 
-		// Uncomment for InsertTest
-		//e2.setId(1); 
-		//e3.setId(4);
-		//e3.setManagerId(12); 
-		//e4.setId(5);
-		//e4.setDepartmentId(10);
+		e3.setManagerId(15);
+		e4.setDepartmentId(15);
+		e5.setId(4);
 
-		 //Uncommnet for DeleteTest
-		emp.setId(2);
-		e4.setId(10);
-		e2.setId(3);
+		e6.setManagerId(15);
+		e7.setDepartmentId(15);
+		e8.setId(10);
+		e1.setDob("01-01-1999");
+		e1.setEmail("this@gmail.com");
 
-		// Uncomment for UpdateTest
-		//e1.setDob("26-08-2003");
-		//e1.setEmail("newemail@gmail.com");
-		//e1.setManagerId(2);
-		//e1.setDepartmentId(1);
-		//emp.setManagerId(5);
-		//emp.setDepartmentId(10);
-		//e3.setId(4);
-
-
+		e9.setId(2);
 	}
 
 	void TearDown() {
@@ -52,4 +41,9 @@ protected:
 	Model::Employee e2 = e1;
 	Model::Employee e3 = e1;
 	Model::Employee e4 = e1;
+	Model::Employee e5 = e1;
+	Model::Employee e6 = e1;
+	Model::Employee e7 = e1;
+	Model::Employee e8 = e1; 
+	Model::Employee e9 = e1; 
 };

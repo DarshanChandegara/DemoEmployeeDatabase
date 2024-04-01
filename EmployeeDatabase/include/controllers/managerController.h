@@ -270,6 +270,8 @@ inline std::optional<Model::Manager> updateManagerController() {
 		}
 	}
 	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
 		return std::nullopt;
 	}
 }

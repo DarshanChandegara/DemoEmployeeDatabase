@@ -1,7 +1,7 @@
 #include "../include/Model/Manager.h"
 #include "../include/controllers/managerController.h"
 
-bool Model::Manager::viewManager() {
+bool Model::Manager::viewManager() const {
 
 	try {
 		system("cls");
@@ -43,7 +43,7 @@ bool Model::Manager::viewManager() {
 	}
 }
 
-bool Model::Manager::insertManager() {
+bool Model::Manager::insertManager() const {
 	try {
 
 		if (auto ch = insertEmployee(); ch) {  
@@ -77,7 +77,7 @@ bool Model::Manager::insertManager() {
 	return false;
 }
 
-bool Model::Manager::updateManager() {
+bool Model::Manager::updateManager() const {
 	try { 
 		if (auto ch = updateEmployee(); ch) {  
 
@@ -113,7 +113,7 @@ bool Model::Manager::updateManager() {
 	return false;
 }
 
-bool Model::Manager::deleteManager() {
+bool Model::Manager::deleteManager() const {
 
 	try {
 		system("cls");

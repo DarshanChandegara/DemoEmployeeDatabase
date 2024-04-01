@@ -57,10 +57,10 @@ namespace Model {
         void setDepartmentId(const int& id) { department_id = id; }
 
 
-        bool viewEmployee();
-        bool insertEmployee();
-        bool deleteEmployee();
-        bool updateEmployee();
+        bool viewEmployee() const;
+        bool insertEmployee() const;
+        bool deleteEmployee() const;
+        bool updateEmployee() const;
         static std::optional<Employee> getEmployee(const std::string&);
 
         Model::Salary s{};

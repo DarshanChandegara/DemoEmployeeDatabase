@@ -1,7 +1,7 @@
 #include "../include/Model/Department.h"
 #include "../include/controllers/departmentController.h"
 
-bool Model::Department::viewDepartment() {
+bool Model::Department::viewDepartment() const  {
 	try {
 		system("cls");
 
@@ -40,7 +40,7 @@ bool Model::Department::viewDepartment() {
 	}
 }
 
-bool Model::Department::insertDepartment() {
+bool Model::Department::insertDepartment() const  {
 	try {
 		//system("cls");
 
@@ -69,12 +69,12 @@ bool Model::Department::insertDepartment() {
 	}
 }
 
-bool Model::Department::updateDepartment() {
+bool Model::Department::updateDepartment() const  {
 
 	try {
 
-		// Uncomment for testing
-		/*std::string select = "select * from Department where id = " + std::to_string(getId()) + ";"; 
+		//  for testing 
+		std::string select = "select * from Department where id = " + std::to_string(getId()) + ";"; 
 
 		DB::Database::getInstance().selectQuery(select.c_str()); 
 
@@ -82,7 +82,7 @@ bool Model::Department::updateDepartment() {
 			std::cout << "\x1b[33m Department is not in database \x1b[0m\n";
 			waitMenu();
 			return false;
-		}*/
+		}
 		std::string query = "update Department set Dname = '" + Dname + "', manager_id = " + std::to_string(manager_id) + ", description =  '" + description + "' where id = " + std::to_string(Did) + "; ";
 		//std::cout << query << "\n";
 		//waitMenu();
@@ -109,7 +109,7 @@ bool Model::Department::updateDepartment() {
 	}
 }
 
-bool Model::Department::deleteDepartment() {
+bool Model::Department::deleteDepartment() const  {
 	try {
 		std::string query = "delete from Department where id = " + std::to_string(Did) + ";";
 
